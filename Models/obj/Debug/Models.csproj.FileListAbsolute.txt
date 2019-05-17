@@ -1,0 +1,16 @@
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\bin\Debug\Models.dll.config
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\bin\Debug\Models.dll
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\bin\Debug\Models.pdb
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\bin\Debug\EntityFramework.dll
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\bin\Debug\EntityFramework.xml
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\obj\Debug\Models.csprojAssemblyReference.cache
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\obj\Debug\Models.csproj.CopyComplete
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\obj\Debug\Models.dll
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\obj\Debug\Models.pdb
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\bin\Debug\PagedList.dll
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\bin\Debug\PagedList.Mvc.dll
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\bin\Debug\PagedList.xml
+C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\bin\Debug\PagedList.Mvc.xml

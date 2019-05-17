@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Models.Framework.bill_detail>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section header {
+    Quản lý đơn hàng
+}
+
+<div class="row" style="padding:10px;">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Danh sách đơn hàng</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive" style="padding:15px;">
+
+                <div class="box-tools">
+                    <div class="input-group input-group-sm col-md-6" style="width: 250px; float:right;">
+                        <input type="text" name="searchString" class="form-control pull-right" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover text-center crud">
+                    <tr>
+                        <th style="border-top:none;">@Html.DisplayNameFor(model => model.bill_id)</th>
+                        <th style="border-top:none;">@Html.DisplayNameFor(model => model.product.name)</th>
+                        <th style="border-top:none;">@Html.DisplayNameFor(model => model.amount)</th>
+                        <th style="border-top:none;">@Html.DisplayNameFor(model => model.price)</th>
+                        <th style="border-top:none;">@Html.DisplayNameFor(model => model.bill.create_date)</th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr id="row_@item.bill_id">
+                            <td>@Html.DisplayFor(modelItem => item.bill_id)</td>
+                            <td>@Html.DisplayFor(modelItem => item.product.name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.amount)</td>
+                            <td>@Html.DisplayFor(modelItem => item.price)</td>
+                            <td>@Html.DisplayFor(modelItem => item.bill.create_date)</td>
+                            <td><button class="btn btn-success">@Html.ActionLink("Sửa", "Edit", new { id = item.bill_id }, new { @style = "color:#fff" })</button></td>
+                            <td>
+                                <button class="btn btn-danger">
+                                    @Ajax.ActionLink("Xóa","Delete",new {@id = item.bill_id },new AjaxOptions
+                               {
+                                   Confirm = "Bạn có muốn xóa bản ghi này không ?",
+                                   OnComplete = "$('#row_"+@item.bill_id + "').remove()",
+                                   HttpMethod = "Delete"
+                               })
+                                </button>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>
+
