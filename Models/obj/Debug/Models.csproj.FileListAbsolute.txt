@@ -14,3 +14,19 @@ C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\bin\Debug\PagedList.dll
 C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\bin\Debug\PagedList.Mvc.dll
 C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\bin\Debug\PagedList.xml
 C:\Users\Nguyen Duc Thinh\source\repos\Toys\Models\bin\Debug\PagedList.Mvc.xml
+C:\Toys_Store\Models\bin\Debug\Models.dll.config
+C:\Toys_Store\Models\bin\Debug\Models.dll
+C:\Toys_Store\Models\bin\Debug\Models.pdb
+C:\Toys_Store\Models\bin\Debug\EntityFramework.dll
+C:\Toys_Store\Models\bin\Debug\EntityFramework.SqlServer.dll
+C:\Toys_Store\Models\bin\Debug\PagedList.dll
+C:\Toys_Store\Models\bin\Debug\PagedList.Mvc.dll
+C:\Toys_Store\Models\bin\Debug\EntityFramework.xml
+C:\Toys_Store\Models\bin\Debug\EntityFramework.SqlServer.xml
+C:\Toys_Store\Models\bin\Debug\PagedList.xml
+C:\Toys_Store\Models\bin\Debug\PagedList.Mvc.xml
+C:\Toys_Store\Models\obj\Debug\Models.csprojAssemblyReference.cache
+C:\Toys_Store\Models\obj\Debug\Models.csproj.CoreCompileInputs.cache
+C:\Toys_Store\Models\obj\Debug\Models.csproj.CopyComplete
+C:\Toys_Store\Models\obj\Debug\Models.dll
+C:\Toys_Store\Models\obj\Debug\Models.pdb

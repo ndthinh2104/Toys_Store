@@ -17,7 +17,7 @@ namespace Toys.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional },
+                new { action = "Index",controller="home", id = UrlParameter.Optional },
                 new[] { "Toys.Areas.Admin.Controllers" }
             );
         }
