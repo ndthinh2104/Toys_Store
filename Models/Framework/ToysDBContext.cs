@@ -52,18 +52,6 @@ namespace Models.Framework
                 .IsFixedLength();
 
             modelBuilder.Entity<product>()
-                .Property(e => e.photo_1)
-                .IsFixedLength();
-
-            modelBuilder.Entity<product>()
-                .Property(e => e.photo_2)
-                .IsFixedLength();
-
-            modelBuilder.Entity<product>()
-                .Property(e => e.photo_3)
-                .IsFixedLength();
-
-            modelBuilder.Entity<product>()
                 .HasMany(e => e.bill_detail)
                 .WithRequired(e => e.product)
                 .HasForeignKey(e => e.product_id)

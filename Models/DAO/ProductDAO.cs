@@ -26,13 +26,7 @@ namespace Models.DAO
         public List<product> ListAll()
         {
             var list =db.products.OrderBy(x => x.id).ToList();
-            List<product> pdlist = new List<product>();
-            foreach(product pd in list)
-            {
-                pd.big_photo = "/Assets/" + pd.big_photo.Trim();
-                pdlist.Add(pd);
-            }
-            return pdlist;
+            return list;
         }
         public product ViewDetail(int id)
         {

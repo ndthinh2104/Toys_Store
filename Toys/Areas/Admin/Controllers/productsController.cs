@@ -32,6 +32,7 @@ namespace Toys.Areas.Admin.Controllers
             ViewBag.CurrentFilter = searchString;
             var sp = from s in db.products
                     select s;
+            
             if(!String.IsNullOrEmpty(searchString))
             {
                 sp = sp.Where(s => s.name.Contains(searchString) || s.price.ToString().Contains(searchString) || s.id.ToString().Contains(searchString));
@@ -69,7 +70,7 @@ namespace Toys.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,available,description,price,price_old,category_id,manufacturer_id,big_photo,photo_1,photo_2,photo_3")] product product)
+        public ActionResult Create([Bind(Include = "id,name,available,description,price,price_old,category_id,manufacturer_id,big_photo")] product product)
         {
             if (ModelState.IsValid)
             {
@@ -105,10 +106,11 @@ namespace Toys.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,available,description,price,price_old,category_id,manufacturer_id,big_photo,photo_1,photo_2,photo_3")] product product)
+        public ActionResult Edit([Bind(Include = "id,name,available,description,price,price_old,category_id,manufacturer_id,big_photo")] product product)
         {
             if (ModelState.IsValid)
             {
+                
                 db.Entry(product).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -124,6 +126,12 @@ namespace Toys.Areas.Admin.Controllers
         {
             new ProductDAO().Delete(id);
             return RedirectToAction("Index");
+        }
+        public string ProcessUpload(HttpPostedFileBase file)
+        {
+            //xu ly upload
+            file.SaveAs(Server.MapPath("~/Assets/Images/"+file.FileName));
+            return "/Assets/Images/" + file.FileName;
         }
 
         protected override void Dispose(bool disposing)

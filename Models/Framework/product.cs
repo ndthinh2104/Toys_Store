@@ -41,18 +41,6 @@
         [DisplayName("Ảnh minh họa")]
         public string big_photo { get; set; }
 
-        [StringLength(500)]
-        [DisplayName("Ảnh chi tiết 1")]
-        public string photo_1 { get; set; }
-
-        [StringLength(500)]
-        [DisplayName("Ảnh chi tiết 2")]
-        public string photo_2 { get; set; }
-
-        [StringLength(500)]
-        [DisplayName("Ảnh chi tiết 3")]
-        public string photo_3 { get; set; }
-
         public virtual category category { get; set; }
 
         public virtual manufacturer manufacturer { get; set; }

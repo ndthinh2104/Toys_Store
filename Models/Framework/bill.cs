@@ -21,6 +21,8 @@
         [Column(TypeName = "date")]
         [DisplayName("Ngày đặt")]
         public DateTime? create_date { get; set; }
+        [DisplayName("Trạng thái đơn hàng")]
+        public int status { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bill_detail> bill_detail { get; set; }
