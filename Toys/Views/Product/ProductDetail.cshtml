@@ -12,26 +12,7 @@
                     <!--product-details-->
                     <div class="col-sm-5">
                         <div class="view-product">
-                            <img src="~/Assets/@Model.big_photo" alt="" />
-                        </div>
-                        <div id="similar-product" class="carousel slide" data-ride="carousel">
-
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner">
-                                <div class="item active">
-                                    <a href=""><img src="@Model.photo_1" alt=""></a>
-                                    <a href=""><img src="@Model.photo_2" alt=""></a>
-                                    <a href=""><img src="@Model.photo_3" alt=""></a>
-                                </div>
-                            </div>
-
-                            <!-- Controls -->
-                            <a class="left item-control" href="#similar-product" data-slide="prev">
-                                <i class="fa fa-angle-left"></i>
-                            </a>
-                            <a class="right item-control" href="#similar-product" data-slide="next">
-                                <i class="fa fa-angle-right"></i>
-                            </a>
+                            <img src="@Model.big_photo" alt="" />
                         </div>
 
                     </div>
@@ -41,7 +22,7 @@
                             <h2>@Model.name</h2>
                             <p>ID: @Model.id</p>
                             <span>
-                                <span>150.000 VNĐ</span>
+                                <span>@Model.price VNĐ</span>
                                 <label>Số lượng:</label>
                                 <input type="text" value="" />
                             </span>
@@ -58,7 +39,7 @@
                 <div class="category-tab shop-details-tab">
                     <!--category-tab-->
                     <div class="col-sm-12">
-                        <p></p>
+                        @Model.description
                     </div>
                 </div><!--/category-tab-->
             </div>
