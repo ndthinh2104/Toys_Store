@@ -34,5 +34,24 @@ CKEDITOR.editorConfig = function( config ) {
 	config.format_tags = 'p;h1;h2;h3;pre';
 
 	// Simplify the dialog windows.
-	config.removeDialogTabs = 'image:advanced;link:advanced';
+    config.removeDialogTabs = 'image:advanced;link:advanced';
+
+    config.htmlEncodeOutput = false;
+    config.entities = false;
+    config.entities_latin = false;
+    config.ForceSimpleAmpersand = true;
+    
+
+    config.syntaxhighlight_lang = 'csharp';
+    config.syntaxhighlight_hideControls = true;
+    config.enterMode = CKEDITOR.ENTER_BR;
+    config.language = 'vi';
+    config.filebrowserBrowseUrl = '/Assets/Plugins/ckfinder/ckfinder.html';
+    config.filebrowserImageBrowseUrl = '/Assets/Plugins/ckfinder/ckfinder.html?Type=Images';
+    config.filebrowserFlashBrowseUrl = '/Assets/Plugins/ckfinder/ckfinder.html?Type=Flash';
+    config.filebrowserUploadUrl = '/Assets/Plugins/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Files';
+    config.filebrowserImageUploadUrl = '/Assets/Images';
+    config.filebrowserFlashUploadUrl = '/Assets/Plugins/ckfinder/core/connector/aspx/connector.aspx?command=QuickUpload&type=Flash';
+    CKFinder.setupCKEditor(null, '/Assets/Plugins/ckfinder/');
+
 };
