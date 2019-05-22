@@ -22,5 +22,11 @@ namespace Models.DAO
             db.SaveChanges();
             return true;
         }
+
+        public List<category> ListAll()
+        {
+            var list = db.categories.OrderBy(x => x.id).ToList();
+            return list;
+        }
     }
 }

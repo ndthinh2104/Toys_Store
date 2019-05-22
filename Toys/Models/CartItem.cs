@@ -9,8 +9,10 @@ namespace Toys.Models
     [Serializable]
     public class CartItem
     {
-        public product Product { get; set; }
+        public int Id_Product { get; set; }
         public int Amount { get; set; }
-        
+        public decimal? price { get; set; } 
+        public string name { get; set; }
+        public string img { get; set; }
     }
 }

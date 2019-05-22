@@ -1,4 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using Models.Framework
+@using Models.DAO
+@using Toys.Models;
+@{ 
+    CategoryDAO dao = new CategoryDAO();
+    List<category> lstCate = dao.ListAll();
+    cart cart = (cart) Session["Cart"];
+    int soLuong = 0;
+    if (cart != null) { soLuong = cart.getSoLuong(); }
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -6,6 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Trang chủ | TmT Toys Store</title>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <link href="~/Assets/Admin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="~/Assets/Admin/css/font-awesome.css" rel="stylesheet">
     <link href="~/Assets/Admin/css/prettyPhoto.css" rel="stylesheet">
@@ -40,7 +52,15 @@
                     <div class="col-md-8 clearfix">
                         <div class="shop-menu clearfix pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="~/Cart/Index"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+                                <li><a href="~/Cart/Index"> Giỏ hàng</a></li>
+                                <li>
+                                <a href="~/Cart/Index">
+                                    <i class="fa fa-shopping-cart"></i><span style="font-size: 9px;display: inline-block;background: #384aeb;color: #fff;padding: 0px 5px;border-radius: 50;position: absolute;top: -8px;right: -12px;
+">@soLuong</span>
+                                </a>
+
+                                </li>
+                                <li><a href="~/admin/login"><i class="fa fa-sign-in"></i> Đăng nhập</a></li>
                             </ul>
                         </div>
                     </div>
@@ -67,12 +87,12 @@
                                 <li class="dropdown">
                                     <a href="#">Sản phẩm<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="#">Board Game</a></li>
-                                        <li><a href="#">Búp bê</a></li>
-                                        <li><a href="#">Đồ chơi xếp hình</a></li>
-                                        <li><a href="#">Ô tô điều khiển</a></li>
-                                        <li><a href="#">Đồ chơi trí tuệ</a></li>
-                                        <li><a href="#">Đồ chơi công nghệ</a></li>
+                                        @foreach (category cate in lstCate)
+                                        {
+                                            <li><a href="/Home/ListProByCate/@cate.id">@cate.name</a></li>
+
+                                        }
+                                        
                                     </ul>
                                 </li>
                                 <li><a href="#">Khuyến mãi</a></li>
@@ -100,44 +120,18 @@
                         <h2>Danh mục sản phẩm </h2>
                         <div class="panel-group category-products" id="accordian">
                             <!--category-productsr-->
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#boardgame">
-                                            Board Game
-                                        </a>
-                                    </h4>
+                            @foreach (category cate in lstCate)
+                            {
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordian" href="/Home/ListProByCate/@cate.id">
+                                                @cate.name
+                                            </a>
+                                        </h4>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a data-toggle="collapse" data-parent="#accordian" href="#dolls">
-                                            Búp bê
-                                        </a>
-                                    </h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Đồ chơi xếp hình</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Ô tô điều khiển</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Đồ chơi trí tuệ</a></h4>
-                                </div>
-                            </div>
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h4 class="panel-title"><a href="#">Đồ chơi công nghệ</a></h4>
-                                </div>
-                            </div>
+                            }
                         </div><!--/category-products-->
 
                         <div class="brands_products">

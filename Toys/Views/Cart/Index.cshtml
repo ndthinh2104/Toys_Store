@@ -1,7 +1,13 @@
-﻿@model List<Toys.Models.CartItem>
+﻿@using Toys.Models
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    cart cart = (cart)Session["Cart"];
+    if(cart == null)
+    {
+        cart = new cart();
+    }
+    List<CartItem> lst = cart.lstcart;
 }
 
 <section id="cart_items">
@@ -23,38 +29,45 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
-                    {
-                        var total = item.Amount * item.Product.price;
+                    <form action="/Cart/update" method="post">
+                        @foreach (var item in lst)
+                        {
+                            var total = item.Amount * item.price;
+
+                            <tr>
+                                <td class="cart_price text-center" style=" width: 130px;">
+                                    <p>@item.Id_Product</p>
+                                </td>
+                                <td class="cart_description text-center">
+                                    <h4><a href="">@item.name</a></h4>
+                                </td>
+                                <td class="cart_price">
+                                    <p>@item.price VNĐ</p>
+                                </td>
+                                <td class="cart_quantity">
+                                    <div class="cart_quantity_button">
+                                        <input class="cart_quantity_input" type="number" name="@item.Id_Product" value="@item.Amount" autocomplete="off" size="2">
+                                    </div>
+                                </td>
+                                <td class="cart_total">
+                                    <p class="cart_total_price">@total</p>
+                                </td>
+                                <td class="cart_delete">
+                                    <a class="cart_quantity_delete" href="/Cart/delete/@item.Id_Product"><i class="fa fa-times"></i></a>
+                                </td>
+
+                            </tr>
+
+
+                        }
+
                         <tr>
-                            <td class="cart_price text-center" style=" width: 130px;">
-                                <p>@item.Product.id</p>
-                            </td>
-                            <td class="cart_description text-center">
-                                <h4><a href="">@item.Product.name</a></h4>
-                            </td>
-                            <td class="cart_price">
-                                <p>@item.Product.price VNĐ</p>
-                            </td>
-                            <td class="cart_quantity">
-                                <div class="cart_quantity_button">
-                                    <a class="cart_quantity_up" href=""> + </a>
-                                    <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-                                    <a class="cart_quantity_down" href=""> - </a>
-                                </div>
-                            </td>
-                            <td class="cart_total">
-                                <p class="cart_total_price">@total</p>
-                            </td>
-                            <td class="cart_delete">
-                                <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                            </td>
+                            <input type="submit" value="Update and checkout" />
                         </tr>
-                    }
-                    <tr>
-                    </tr>
+                    </form>
                 </tbody>
             </table>
+
         </div>
     </div>
 </section> <!--/#cart_items-->

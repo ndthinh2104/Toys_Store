@@ -1,6 +1,7 @@
 ﻿using Models.Framework;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,6 +27,13 @@ namespace Models.DAO
         public List<product> ListAll()
         {
             var list =db.products.OrderBy(x => x.id).ToList();
+            return list;
+        }
+
+        public List<product> ListProByCate(int id)
+        {
+            
+            var list = db.products.SqlQuery(" Select * from Product where category_id = @id ", new SqlParameter("id",id)).ToList();
             return list;
         }
         public product ViewDetail(int id)

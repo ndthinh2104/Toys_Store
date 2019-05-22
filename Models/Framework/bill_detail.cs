@@ -25,7 +25,7 @@
         public int? amount { get; set; }
         [DisplayName("Giá")]
         public decimal? price { get; set; }
-        public string address { get; set; }
+
 
         public virtual bill bill { get; set; }
 

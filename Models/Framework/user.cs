@@ -28,5 +28,12 @@
         public string fullname { get; set; }
 
         public int? permission { get; set; }
+        public int status { get; set; }
+        public string email { get; set; }
+        public string address { get; set; }
+        public string phone { get; set; }
+        public string gender { get; set; }
+
+
     }
 }

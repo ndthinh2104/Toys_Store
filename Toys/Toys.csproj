@@ -156,6 +156,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\cart.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\UserLogin.cs" />
@@ -1751,7 +1752,9 @@
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Product\ProductDetail.cshtml" />
-    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Cart\index.cshtml" />
+    <Content Include="Views\Cart\update.cshtml" />
+    <Content Include="Views\Home\ListProByCate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

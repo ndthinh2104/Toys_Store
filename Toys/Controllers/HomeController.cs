@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Models.Framework;
 
 namespace Toys.Controllers
 {
@@ -12,9 +13,16 @@ namespace Toys.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            ViewBag.Products = new ProductDAO().ListAll();
+            var list = new ProductDAO().ListAll();
+            ViewBag.Products = list;
             
             return View();
+        }
+
+        public ActionResult ListProByCate(int id)
+        {
+            List<product> listPro = new ProductDAO().ListProByCate(id);
+            return View(listPro);
         }
     }
 }

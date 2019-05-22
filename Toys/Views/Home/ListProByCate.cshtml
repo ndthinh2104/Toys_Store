@@ -1,23 +1,9 @@
-﻿@model List<Models.Framework.product>
+﻿@using Models.Framework
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var products = (List<Models.Framework.product>)ViewBag.Products;
-    var message = Session["message"];
 }
-@if (message != null)
-{
-<script type="text/javascript">
-    $(document).ready(function () {
-        alert("@message");
-    });  
-</script>
-    Session["message"] = null;
-}
-
-
-
-
-@foreach (var item in ViewBag.Products)
+@model List<Models.Framework.product>
+@foreach (product item in Model)
 {
     var url = "/Product/ProductDetail/" + item.id;
     <a href="@url">
@@ -31,7 +17,7 @@
                         <div class="overlay-content">
                             <h2>@item.price</h2>
                             <p>@item.name</p>
-                            <a href="/Cart/Add/@item.id" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                            <a href="/gio-hang?productId=@item.id&amount=1" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
                         </div>
                     </div>
                 </div>

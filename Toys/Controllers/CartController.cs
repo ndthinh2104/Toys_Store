@@ -1,4 +1,5 @@
 ﻿using Models.DAO;
+using Models.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,56 +11,99 @@ namespace Toys.Controllers
 {
     public class CartController : Controller
     {
+
+        ToysDBContext db;
         private const string CartSession = "CartSession";
         // GET: Cart
         public ActionResult Index()
         {
-            var cart = Session[CartSession];
-            var list = new List<CartItem>();
-            if(cart != null)
-            {
-                list = (List<CartItem>)cart;
-            }
-            return View(list);
+            
+
+            return View();
         }
-        public ActionResult AddItem(int productId, int amount)
+        public ActionResult Add(int id)
         {
-            var product = new ProductDAO().ViewDetail(productId);
-            var cart = Session[CartSession];
-            if (cart != null)
+            ProductDAO pro = new ProductDAO();
+            product product = pro.ViewDetail(id);
+            cart Cart = (cart)Session["Cart"];
+            if (Cart == null)
             {
-                var list = (List<CartItem>)cart;
-                if (list.Exists(x => x.Product.id == productId))
+                Cart = new cart();  
+            }
+            if (product.price == 0)
+                Cart.AddItem(product.id, product.name, product.big_photo, product.price_old);
+            else Cart.AddItem(product.id, product.name, product.big_photo, product.price);
+
+            Session["Cart"] = Cart;
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+        public ActionResult delete(int id)
+        {
+            ProductDAO pro = new ProductDAO();
+            product product = pro.ViewDetail(id);
+            cart Cart = (cart)Session["Cart"];
+            if (Cart == null)
+            {
+                Cart = new cart();
+            }
+            Cart.delete(id);
+            Session["Cart"] = Cart;
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+        [HttpPost]
+        public ActionResult update()
+        {
+                String temp;
+                cart cart = (cart)Session["cart"];
+                for (int i = 0; i < cart.lstcart.Count(); i++)
                 {
-                    foreach (var item in list)
+                    temp = Request.Form[cart.lstcart[i].Id_Product.ToString()];
+                    if (temp == null && cart.lstcart[i].Amount != null)
                     {
-                        if (item.Product.id == productId)
-                        {
-                            item.Amount += amount;
-                        }
+                      continue;
+                    }
+                    else if (temp == null || Int32.Parse(temp) == 0)
+                    {
+                        cart.lstcart.RemoveAt(i);
+                    }
+                    else
+                    {
+                        cart.lstcart[i].Amount = Int32.Parse(temp);
+                        //cart.lstcart[i].Total = (Double)cart.lst[i].amount * cart.lst[i].price;
                     }
                 }
-                else
-                {
-                    var item = new CartItem();
-                    item.Product.id = productId;
-                    item.Amount = amount;
-                    list.Add(item);
-                }
-                Session[CartSession] = list;
-            }
-            else
+            Session["Cart"] = cart;
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult pay( bill ttKhachHang )
+        {
+            db = new ToysDBContext();
+            db.bills.Add(ttKhachHang);
+
+
+            cart cart = (cart)Session["cart"];
+            foreach(CartItem item in cart.lstcart)
             {
-                // tao moi doi tuong cartitem
-                var item = new CartItem();
-                item.Product = product;
-                item.Amount = amount;
-                var list = new List<CartItem>();
-                list.Add(item);
-                //gan vao session
-                Session[CartSession] = list;
+                bill_detail detail = new bill_detail();
+                detail.bill_id = ttKhachHang.id;
+                detail.product_id = item.Id_Product;
+                detail.amount = item.Amount;
+                detail.price = item.Amount * item.price;
+                db.bill_detail.Add(detail);
             }
-            return RedirectToAction("Index");
+
+            int stt = db.SaveChanges();
+            string message = "Luư dữ liệu lỗi";
+            if (stt > 0)
+            {
+                 message = "Lưu dữ liệu thành công";
+            }
+            Session["message"] = message;
+            return RedirectToAction("Index","Home");
+
         }
     }
 }
