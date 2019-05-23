@@ -25,6 +25,7 @@ namespace Models.DAO
 
         public List<slide> ListAll()
         {
+
             var list = db.slides.OrderBy(x => x.id).ToList();
             return list;
         }

@@ -48,6 +48,7 @@ namespace Models.DAO
         }
         public List<user> ListAll()
         {
+
             var list = db.users.OrderBy(x => x.id).ToList();
             return list;
             
