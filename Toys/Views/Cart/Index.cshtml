@@ -15,21 +15,21 @@
         <div class="review-payment">
             <h2>Giỏ hàng</h2>
         </div>
+        <form action="/Cart/update" method="post">
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="price text-center" style=" width: 130px;">Mã sản phẩm</td>
+                            <td class="description text-center" style=" width: 240px; ">Tên sản phẩm</td>
+                            <td class="price text-center" style=" width: 110px; ">Giá</td>
+                            <td class="quantity" style=" width: 110px; ">Số lượng</td>
+                            <td class="total text-center" style=" width: 130px; ">Tổng tiền</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-        <div class="table-responsive cart_info">
-            <table class="table table-condensed">
-                <thead>
-                    <tr class="cart_menu">
-                        <td class="price text-center" style=" width: 130px;">Mã sản phẩm</td>
-                        <td class="description text-center" style=" width: 240px; ">Tên sản phẩm</td>
-                        <td class="price text-center" style=" width: 110px; ">Giá</td>
-                        <td class="quantity" style=" width: 110px; ">Số lượng</td>
-                        <td class="total text-center" style=" width: 130px; ">Tổng tiền</td>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <form action="/Cart/update" method="post">
                         @foreach (var item in lst)
                         {
                             var total = item.Amount * item.price;
@@ -61,13 +61,15 @@
 
                         }
 
-                        <tr>
-                            <input type="submit" value="Update and checkout" />
-                        </tr>
-                    </form>
-                </tbody>
-            </table>
 
-        </div>
+
+
+
+                    </tbody>
+
+                </table>
+                <input class="btn btn-success text-center" type="submit" value="Update and checkout" />
+            </div>
+        </form>
     </div>
 </section> <!--/#cart_items-->

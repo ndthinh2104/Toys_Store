@@ -32,25 +32,32 @@
                                 <th style="border-top:none;">@Html.DisplayNameFor(model => model.id)</th>
                                 <th style="border-top:none;">@Html.DisplayNameFor(model => model.username)</th>
                                 <th style="border-top:none;">@Html.DisplayNameFor(model => model.fullname)</th>
+                                <th style="border-top:none;">@Html.DisplayNameFor(model => model.address)</th>
+                                <th style="border-top:none;">@Html.DisplayNameFor(model => model.email)</th>
+                                <th style="border-top:none;">@Html.DisplayNameFor(model => model.phone)</th>
                             </tr>
                             @foreach (var item in Model)
                             {
-                                <tr id="row_@item.id">
-                                    <td>@Html.DisplayFor(modelItem => item.id)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.username)</td>
-                                    <td>@Html.DisplayFor(modelItem => item.fullname)</td>
-                                    <td><button class="btn btn-success">@Html.ActionLink("Sửa", "Edit", new { id = item.id }, new { @style = "color:#fff"})</button></td>
-                                    <td>
-                                        <button class="btn btn-danger">
-                                            @Ajax.ActionLink("Xóa","Delete",new {@id = item.id },new AjaxOptions
-                                       {
-                                           Confirm = "Bạn có muốn xóa bản ghi này không ?",
-                                           OnComplete = "$('#row_"+@item.id+"').remove()",
-                                           HttpMethod = "Delete"
-                                       })
-                                        </button>
-                                    </td>
-                                </tr>
+                            <tr id="row_@item.id">
+                                <td>@Html.DisplayFor(modelItem => item.id)</td>
+                                <td>@Html.DisplayFor(modelItem => item.username)</td>
+                                <td>@Html.DisplayFor(modelItem => item.fullname)</td>
+                                <td>@Html.DisplayFor(modelItem => item.address)</td>
+                                <td>@Html.DisplayFor(modelItem => item.email)</td>
+                                <td>@Html.DisplayFor(modelItem => item.phone)</td>
+
+                                <td><button class="btn btn-success">@Html.ActionLink("Sửa", "Edit", new { id = item.id }, new { @style = "color:#fff" })</button></td>
+                                <td>
+                                    <button class="btn btn-danger">
+                                        @Ajax.ActionLink("Xóa","Delete",new {@id = item.id },new AjaxOptions
+                                   {
+                                       Confirm = "Bạn có muốn xóa bản ghi này không ?",
+                                       OnComplete = "$('#row_"+@item.id+"').remove()",
+                                       HttpMethod = "Delete"
+                                   })
+                                    </button>
+                                </td>
+                            </tr>
                             }
 
                         </table>

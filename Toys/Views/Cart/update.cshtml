@@ -12,94 +12,104 @@
 
 <section id="cart_items">
     <div class="container">
-        <div class="review-payment">
-            <h2>Thông tin Hóa Đơn</h2>
-        </div>
+        <div class="row">
+            <div class="review-payment">
+                <h2>Thông tin Hóa Đơn</h2>
+            </div>
 
-        <div class="table-responsive cart_info">
-            <table class="table table-condensed">
-                <thead>
-                    <tr class="cart_menu">
-                        <td class="price text-center" style=" width: 130px;">Mã sản phẩm</td>
-                        <td class="description text-center" style=" width: 240px; ">Tên sản phẩm</td>
-                        <td class="price text-center" style=" width: 110px; ">Giá</td>
-                        <td class="quantity" style=" width: 110px; ">Số lượng</td>
-                        <td class="total text-center" style=" width: 130px; ">Tổng tiền</td>
-                        <td></td>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach (var item in lst)
-                    {
-                        var total = item.Amount * item.price;
-
-                        <tr>
-                            <td class="cart_price text-center" style=" width: 130px;">
-                                <p>@item.Id_Product</p>
-                            </td>
-                            <td class="cart_description text-center">
-                                <h4>@item.name</h4>
-                            </td>
-                            <td class="cart_price">
-                                <p>@item.price VNĐ</p>
-                            </td>
-                            <td class="cart_quantity">
-                                <p>@item.Amount</p>
-                            </td>
-                            <td class="cart_total">
-                                <p class="cart_total_price">@total</p>
-                            </td>
-
-
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="price text-center" style=" width: 130px;">Mã sản phẩm</td>
+                            <td class="description text-center" style=" width: 240px; ">Tên sản phẩm</td>
+                            <td class="price text-center" style=" width: 110px; ">Giá</td>
+                            <td class="quantity" style=" width: 110px; ">Số lượng</td>
+                            <td class="total text-center" style=" width: 130px; ">Tổng tiền</td>
+                            <td></td>
                         </tr>
-                    }
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in lst)
+                        {
+                            var total = item.Amount * item.price;
+
+                            <tr>
+                                <td class="cart_price text-center" style=" width: 130px;">
+                                    <p>@item.Id_Product</p>
+                                </td>
+                                <td class="cart_description text-center">
+                                    <h4>@item.name</h4>
+                                </td>
+                                <td class="cart_price">
+                                    <p>@item.price VNĐ</p>
+                                </td>
+                                <td class="cart_quantity">
+                                    <p>@item.Amount</p>
+                                </td>
+                                <td class="cart_total">
+                                    <p class="cart_total_price">@total VNĐ</p>
+                                </td>
+
+
+                            </tr>
+                        }
 
 
 
 
-                </tbody>
-            </table>
-            <form action="/Cart/pay" method="post">
-                <div>
-                    <h4>Thông tin đặt hàng</h4>
-                    <div class="space20">&nbsp;</div>
+                    </tbody>
+                </table>
 
-                    <div class="form-block">
-                        <label for="name">Họ tên*</label>
-                        <input type="text" name="name" placeholder="Họ tên" value="" required>
-                    </div>
-                    <div class="form-block">
-                        <label>Giới tính </label>
-                        <input id="gender" type="radio" class="input-radio" name="gender" value="1" checked="checked" style="width: 10%"><span style="margin-right: 10%">Nam</span>
-                        <input id="gender" type="radio" class="input-radio" name="gender" value="0" style="width: 10%"><span>Nữ</span>
-
-                    </div>
-
-                    <div class="form-block">
-                        <label for="email">Email*</label>
-                        <input type="email" id="email" name="email" required value="" placeholder="expample@gmail.com">
-                    </div>
-
-                    <div class="form-block">
-                        <label for="adress">Địa chỉ*</label>
-                        <input type="text" id="address" name="address" placeholder="Street Address" value="" required>
-                    </div>
-
-
-                    <div class="form-block">
-                        <label for="phone">Điện thoại*</label>
-                        <input type="text" id="phone" name="phone" value="" required>
-                    </div>
-
-                    <div class="form-block">
-                        <label for="notes">Ghi chú</label>
-                        <textarea id="note" name="note" required></textarea>
-                    </div>
+                <div class="review-payment col-md-10" style="width:100%">
+                    <h2>Thông tin đặt hàng</h2>
                 </div>
-                <input type="submit" value="checkout" />
-            </form>
 
+                <form action="/Cart/pay" method="post">
+                    <div style="width:60%">
+                        <div class="space20">&nbsp;</div>
+
+                        <div class="form-group col-md-10">
+                            <label for="name">Họ tên*</label>
+                            <input type="text" class="form-control" name="name" placeholder="Họ tên" value="" required>
+                        </div>
+                        <div class="form-group col-md-10">
+                            <label>Giới tính </label>
+                            <input id="gender" type="radio" class="input-radio" name="gender" value="1" checked="checked" style="width: 10%"><span style="margin-right: 10%">Nam</span>
+                            <input id="gender" type="radio" class="input-radio" name="gender" value="0" style="width: 10%"><span>Nữ</span>
+
+                        </div>
+
+                        <div class="form-group col-md-10">
+                            <label for="email">Email*</label>
+                            <input class="form-control" type="email" id="email" name="email" required value="" placeholder="Nhập Email">
+                        </div>
+
+                        <div class="form-group col-md-10">
+                            <label for="adress">Địa chỉ*</label>
+                            <input class="form-control" type="text" id="address" name="address" placeholder="Nhập địa chỉ" value="" required>
+                        </div>
+
+
+                        <div class="form-group col-md-10">
+                            <label for="phone">Điện thoại*</label>
+                            <input class="form-control" type="text" id="phone" name="phone" placeholder="Nhập số điện thoại" value="" required>
+                        </div>
+
+                        <div class="form-group col-md-10">
+                            <label for="notes">Ghi chú</label>
+                            <textarea class="form-control" placeholder="Nhập ghi chú" id="note" name="note" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-10">
+                        <input class="btn btn-success" type="submit" value="Đặt hàng" />
+                    </div>
+                    
+                </form>
+
+            </div>
         </div>
+
     </div>
 </section> <!--/#cart_items-->
