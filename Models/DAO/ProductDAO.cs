@@ -46,5 +46,11 @@ namespace Models.DAO
             var list = db.products.SqlQuery(" Select * from Product where manufacturer_id = @id ", new SqlParameter("id", id)).ToList();
             return list;
         }
+        public List<product> ListProBySaleOff()
+        {
+
+            var list = db.products.SqlQuery(" Select * from Product where price <> 0 ").ToList();
+            return list;
+        }
     }
 }
