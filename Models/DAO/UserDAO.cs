@@ -28,6 +28,10 @@ namespace Models.DAO
             user.username = entity.username;
             user.fullname = entity.fullname;
             user.password = entity.password;
+            user.address = entity.address;
+            user.email = entity.email;
+            user.gender = entity.gender;
+            user.phone = entity.phone;
             db.SaveChanges();
             return true;
         }
@@ -57,7 +61,7 @@ namespace Models.DAO
         }
         public user GetUserByID(string username)
         {
-            return db.users.SingleOrDefault(x => x.username == username);
+            return db.users.FirstOrDefault(x => x.username == username);
         }
         public bool Login(string username, string password)
         {

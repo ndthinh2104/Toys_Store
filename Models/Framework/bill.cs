@@ -22,12 +22,12 @@
         [DisplayName("Ngày đặt")]
         public DateTime? create_date { get; set; }
         [DisplayName("Trạng thái đơn hàng")]
-        public int status { get; set; }
-        public int note { get; set; }
+        public int? status { get; set; }
+        public string note { get; set; }
         public string name { get; set; }
         public string email { get; set; }
         public string phone { get; set; }
-        public int gender  { get; set; }
+        public int? gender  { get; set; }
         public string address { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -28,11 +28,15 @@
         public string fullname { get; set; }
 
         public int? permission { get; set; }
-        public int status { get; set; }
+        public int? status { get; set; }
+        [DisplayName("Địa chỉ email")]
         public string email { get; set; }
+        [DisplayName("Địa chỉ")]
         public string address { get; set; }
+        [DisplayName("Số điện thoại")]
         public string phone { get; set; }
-        public string gender { get; set; }
+        [DisplayName("Giới tính")]
+        public int? gender { get; set; }
 
 
     }
