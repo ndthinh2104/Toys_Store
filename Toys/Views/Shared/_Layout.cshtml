@@ -4,6 +4,8 @@
 @{ 
     CategoryDAO dao = new CategoryDAO();
     List<category> lstCate = dao.ListAll();
+    ManufacturerDAO dao1 = new ManufacturerDAO();
+    List<manufacturer> lstManu = dao1.ListAll();
     cart cart = (cart) Session["Cart"];
     int soLuong = 0;
     if (cart != null) { soLuong = cart.getSoLuong(); }
@@ -139,11 +141,10 @@
                             <h2>Thương hiệu</h2>
                             <div class="brands-name">
                                 <ul class="nav nav-pills nav-stacked">
-                                    <li><a href="#"> <span class="pull-right">(50)</span>Lego</a></li>
-                                    <li><a href="#"> <span class="pull-right">(56)</span>Barbie</a></li>
-                                    <li><a href="#"> <span class="pull-right">(27)</span>Board Game VN</a></li>
-                                    <li><a href="#"> <span class="pull-right">(32)</span>Viethands</a></li>
-                                    <li><a href="#"> <span class="pull-right">(5)</span>XiaoBaoBei</a></li>
+                                    @foreach (manufacturer manu in lstManu)
+                                    {
+                                        <li><a href="/Home/ListProByManu/@manu.id"> <span class="pull-right">@manu.products.Count</span>@manu.name</a></li>
+                                    }
                                 </ul>
                             </div>
                         </div><!--/brands_products-->

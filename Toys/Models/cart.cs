@@ -29,7 +29,7 @@ namespace Toys.Models
             return price;
         }
 
-        public void AddItem(int id, string name,string img, decimal? price)
+        public void AddItem(int id, string name,string img, decimal? price,int amount)
         {
 
             bool exist = false;
@@ -38,7 +38,7 @@ namespace Toys.Models
                 if(i.Id_Product == id)
                 {
                     exist = true;
-                    i.Amount++;
+                    i.Amount+= amount;
                     break;
                 }
             }
@@ -50,7 +50,7 @@ namespace Toys.Models
                 cart.price = price;
                 cart.img = img;
                 cart.name = name;
-                cart.Amount = 1;
+                cart.Amount +=amount;
                 lstcart.Add(cart);
             }
           

@@ -22,5 +22,10 @@ namespace Models.DAO
             db.SaveChanges();
             return true;
         }
+        public List<manufacturer> ListAll()
+        {
+            var list = db.manufacturers.OrderBy(x => x.id).ToList();
+            return list;
+        }
     }
 }

@@ -1,9 +1,13 @@
-﻿@using Models.Framework
+﻿
 @{
+    ViewBag.Title = "ListProByManu";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h2>List Product By Manufacturer</h2>
+
+@using Models.Framework
 @model List<Models.Framework.product>
-<h2>List Product By Category</h2>
 @foreach (product item in Model)
 {
     var url = "/Product/ProductDetail/" + item.id;

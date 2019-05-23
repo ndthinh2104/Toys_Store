@@ -21,7 +21,7 @@ namespace Toys.Controllers
 
             return View();
         }
-        public ActionResult Add(int id)
+        public ActionResult Add(int id,int amount = 1)
         {
             ProductDAO pro = new ProductDAO();
             product product = pro.ViewDetail(id);
@@ -31,8 +31,27 @@ namespace Toys.Controllers
                 Cart = new cart();  
             }
             if (product.price == 0)
-                Cart.AddItem(product.id, product.name, product.big_photo, product.price_old);
-            else Cart.AddItem(product.id, product.name, product.big_photo, product.price);
+                Cart.AddItem(product.id, product.name, product.big_photo, product.price_old,amount);
+            else Cart.AddItem(product.id, product.name, product.big_photo, product.price,amount);
+
+            Session["Cart"] = Cart;
+            return Redirect(Request.UrlReferrer.ToString());
+        }
+        [HttpPost]
+        public ActionResult AddMany(int id, int amount )
+        {
+            amount = Convert.ToInt16(Request.Form["amount"]);
+            id = Convert.ToInt16( Request.Form["id"]);
+            ProductDAO pro = new ProductDAO();
+            product product = pro.ViewDetail(id);
+            cart Cart = (cart)Session["Cart"];
+            if (Cart == null)
+            {
+                Cart = new cart();
+            }
+            if (product.price == 0)
+                Cart.AddItem(product.id, product.name, product.big_photo, product.price_old, amount);
+            else Cart.AddItem(product.id, product.name, product.big_photo, product.price, amount);
 
             Session["Cart"] = Cart;
             return Redirect(Request.UrlReferrer.ToString());
@@ -102,6 +121,7 @@ namespace Toys.Controllers
                  message = "Lưu dữ liệu thành công";
             }
             Session["message"] = message;
+            Session["Cart"] = null;
             return RedirectToAction("Index","Home");
 
         }

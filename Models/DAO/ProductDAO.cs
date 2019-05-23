@@ -40,5 +40,11 @@ namespace Models.DAO
         {
             return db.products.Find(id);
         }
+        public List<product> ListProByManu(int id)
+        {
+
+            var list = db.products.SqlQuery(" Select * from Product where manufacturer_id = @id ", new SqlParameter("id", id)).ToList();
+            return list;
+        }
     }
 }

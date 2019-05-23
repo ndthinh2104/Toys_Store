@@ -1,7 +1,11 @@
 ﻿@model Models.Framework.product
+@using Models.DAO
+
 @{
     ViewBag.Title = "ProductDetail";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ProductDAO dao1 = new ProductDAO();
+    List<Models.Framework.product> lst = dao1.ListProByManu(Model.manufacturer_id);
 }
 
 <section>
@@ -17,22 +21,23 @@
 
                     </div>
                     <div class="col-sm-7">
-                        <div class="product-information">
-                            <!--/product-information-->
-                            <h2>@Model.name</h2>
-                            <p>ID: @Model.id</p>
-                            <span>
-                                <span>@Model.price VNĐ</span>
-                                <label>Số lượng:</label>
-                                <input type="text" value="" />
-                            </span>
-                            <p><b>Thương hiệu:</b> @Model.manufacturer.name</p>
-                            <a href="/gio-hang?productId=@Model.id&amount=1">
-                                <i class="fa fa-shopping-cart"></i>
-                                Thêm vào giỏ hàng
-                            </a>
+                        <form action="/Cart/AddMany" method="post">
+                            <div class="product-information">
+                                <!--/product-information-->
+                                <h2>@Model.name</h2>
+                                <p>ID: @Model.id</p>
+                                <span>
+                                    <span>@Model.price VNĐ</span>
+                                    <label>Số lượng:</label>
+                                    <input type="number" value="1" name="amount" />
+                                    <input name="id" value="@Model.id" style="display:none;">
+                                </span>
+                                <p><b>Thương hiệu:</b> @Model.manufacturer.name</p>
+                                <input type="submit" class="btn btn-default" value="Thêm vào giỏ hàng">
 
-                        </div><!--/product-information-->
+
+                            </div><!--/product-information-->
+                        </form>
                     </div>
                 </div><!--/product-details-->
 
@@ -42,8 +47,43 @@
                         @Model.description
                     </div>
                 </div><!--/category-tab-->
+                <div class="recommended_items">
+                    <!--recommended_items-->
+                    <h2 class="title text-center">Cùng thương hiệu</h2>
+                    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+                                    <i class="fa fa-angle-left"></i>
+                                </a>
+                                @foreach (Models.Framework.product item in lst)
+                                {
+                                    <div class="col-sm-4">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    <a href="/Product/ProductDetail/@item.id"><img src="@item.big_photo" alt="" /></a>
+                                                    <h2>@item.price VNĐ</h2>
+                                                    <a href="/Product/ProductDetail/@item.id">
+                                                        <p>@item.name</p>
+                                                    </a>
+                                                        <a class="btn btn-default add-to-cart" href="/Cart/Add/@item.id"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+
+
+
+                                <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
+                        </div><!--/recommended_items-->
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
 </section>
 
