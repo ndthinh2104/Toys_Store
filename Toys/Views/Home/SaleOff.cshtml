@@ -22,19 +22,66 @@
                         <div class="overlay-content">
                             @if (item.price == 0)
                             {
-                            <h2>@String.Format("{0:0,0} VNĐ", item.price_old)</h2>
+                                <h2>@String.Format("{0:0,0} VNĐ", item.price_old)</h2>
                             }
                             else
                             {
- 							<h2 style="text-decoration: line-through;">@String.Format("{0:0,0} VNĐ", item.price_old)</h2>
-                            <h2 style="color: #B22222;">@String.Format("{0:0,0} VNĐ", item.price)</h2>                            }
-
+                                <h2 style="text-decoration: line-through;">@String.Format("{0:0,0} VNĐ", item.price_old)</h2>
+                                <h2 style="color: #B22222;">@String.Format("{0:0,0} VNĐ", item.price)</h2>
+                            }
+                            <p>@item.name</p>
+                            <a href="/Cart/Add/@item.id" class="btn btn-default add-to-cart">
+                                <i class="fa fa-shopping-cart"></i>
+                                Thêm vào giỏ hàng
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </a>
+    </a>
 
-        }
+}
 
+@if (ViewBag.TotalPage > 1)
+{
+    var pageDisplay = (int)ViewBag.MaxPage;
+    int totalPage = (int)ViewBag.TotalPage;
+    int currentPage = ((int)ViewBag.Page);
+
+    // Create numeric links
+    var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+    var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+    var link = "";
+    <nav>
+        <ul class="pagination">
+            @if (currentPage > ViewBag.First)
+            {
+                <li><a href="@link?page=@ViewBag.First" title="Trang đầu" class="first"><i class="fa fa-angle-double-left"></i></a></li>
+
+            }
+            @for (int i = startPageIndex; i <= endPageIndex; i++)
+            {
+                if (currentPage == i)
+                {
+
+                    <li> <a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
+                }
+                else
+                {
+                    <li><a href="@link?page=@i" title="Trang @i" class="pos">@i</a></li>
+                }
+            }
+            @if (currentPage < totalPage)
+            {
+                <li> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối"><i class="fa fa-angle-double-right"></i></a></li>
+            }
+
+        </ul>
+    </nav>
+}
+else
+{
+    <span>Không có bản ghi nào</span>
+}
