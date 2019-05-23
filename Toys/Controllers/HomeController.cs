@@ -12,7 +12,7 @@ namespace Toys.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        public ActionResult Index(int page = 1, int pageSize = 9)
+        public ActionResult Index(int page = 1, int pageSize = 6)
         {
             int totalRecord = 0;
             var list = new ProductDAO().ListAll(ref totalRecord,page, pageSize);
@@ -36,7 +36,7 @@ namespace Toys.Controllers
             return View();
         }
 
-        public ActionResult ListProByCate(int id,int page = 1, int pageSize = 9)
+        public ActionResult ListProByCate(int id,int page = 1, int pageSize = 6)
         {
             int totalRecord = 0;
             List<product> listPro = new ProductDAO().ListProByCate(id, ref totalRecord, page, pageSize);
@@ -58,7 +58,7 @@ namespace Toys.Controllers
 
             return View(listPro);
         }
-        public ActionResult ListProByManu(int id, int page = 1, int pageSize = 9)
+        public ActionResult ListProByManu(int id, int page = 1, int pageSize = 6)
         {
             int totalRecord = 0;
             List<product> listPro = new ProductDAO().ListProByManu(id, ref totalRecord, page, pageSize);
@@ -79,7 +79,7 @@ namespace Toys.Controllers
 
             return View(listPro);
         }
-        public ActionResult SaleOff(int page = 1, int pageSize = 9)   
+        public ActionResult SaleOff(int page = 1, int pageSize = 6)   
         {
             int totalRecord = 0;
             var product = new ProductDAO().ListProBySaleOff(ref totalRecord, page, pageSize);
