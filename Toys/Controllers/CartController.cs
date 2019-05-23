@@ -99,6 +99,7 @@ namespace Toys.Controllers
         [HttpPost]
         public ActionResult pay( bill ttKhachHang )
         {
+            ttKhachHang.create_date = DateTime.Now.Date;
             db = new ToysDBContext();
             db.bills.Add(ttKhachHang);
 
@@ -122,6 +123,7 @@ namespace Toys.Controllers
             }
             Session["message"] = message;
             Session["Cart"] = null;
+
             return RedirectToAction("Index","Home");
 
         }
