@@ -9,6 +9,8 @@
     cart cart = (cart) Session["Cart"];
     int soLuong = 0;
     if (cart != null) { soLuong = cart.getSoLuong(); }
+    SlideDAO sldao = new SlideDAO();
+    List<slide> lstSlide = sldao.ListAll();
 }
 
 <!DOCTYPE html>
@@ -21,8 +23,11 @@
     <title>Trang chủ | TmT Toys Store</title>
     <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
     <link href="~/Assets/Admin/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Assets/Admin/css/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/Assets/Admin/css/owl.theme.default.min.css" rel="stylesheet">
     <link href="~/Assets/Admin/css/font-awesome.css" rel="stylesheet">
     <link href="~/Assets/Admin/css/prettyPhoto.css" rel="stylesheet">
+
     <link href="~/Assets/Admin/css/price-range.css" rel="stylesheet">
     <link href="~/Assets/Admin/css/animate.css" rel="stylesheet">
     <link href="~/Assets/Admin/css/main.css" rel="stylesheet">
@@ -56,158 +61,186 @@
                             <ul class="nav navbar-nav">
                                 <li><a href="~/Cart/Index"> Giỏ hàng</a></li>
                                 <li>
-                                <a href="~/Cart/Index">
-                                    <i class="fa fa-shopping-cart"></i><span style="font-size: 9px;display: inline-block;background: #384aeb;color: #fff;padding: 0px 5px;border-radius: 50;position: absolute;top: -8px;right: -12px;
+                                    <a href="~/Cart/Index">
+                                        <i class="fa fa-shopping-cart"></i><span style="font-size: 9px;display: inline-block;background: #384aeb;color: #fff;padding: 0px 5px;border-radius: 50;position: absolute;top: -8px;right: -12px;
 ">@soLuong</span>
-                                </a>
+</a>
 
-                                </li>
-                                <li><a href="~/admin/login"><i class="fa fa-sign-in"></i> Đăng nhập</a></li>
+</li>
+<li><a href="~/admin/login"><i class="fa fa-sign-in"></i> Đăng nhập</a></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div><!--/header-middle-->
+
+<div class="header-bottom">
+    <!--header-bottom-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="mainmenu pull-left">
+                    <ul class="nav navbar-nav collapse navbar-collapse">
+                        <li><a href="~/Home/Index" class="active">Trang chủ</a></li>
+                        <li class="dropdown">
+                            <a href="#">Sản phẩm<i class="fa fa-angle-down"></i></a>
+                            <ul role="menu" class="sub-menu">
+                                @foreach (category cate in lstCate)
+                                {
+                                    <li><a href="/Home/ListProByCate/@cate.id">@cate.name</a></li>
+
+                                }
+
                             </ul>
-                        </div>
-                    </div>
+                        </li>
+                        <li><a href="/Home/SaleOff">Khuyến mãi</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
                 </div>
             </div>
-        </div><!--/header-middle-->
-
-        <div class="header-bottom">
-            <!--header-bottom-->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-9">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
-                        <div class="mainmenu pull-left">
-                            <ul class="nav navbar-nav collapse navbar-collapse">
-                                <li><a href="~/Home/Index" class="active">Trang chủ</a></li>
-                                <li class="dropdown">
-                                    <a href="#">Sản phẩm<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        @foreach (category cate in lstCate)
-                                        {
-                                            <li><a href="/Home/ListProByCate/@cate.id">@cate.name</a></li>
-
-                                        }
-                                        
-                                    </ul>
-                                </li>
-                                <li><a href="/Home/SaleOff">Khuyến mãi</a></li>
-                                <li><a href="#">Liên hệ</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="search_box pull-right">
-                            <input type="text" placeholder="Search" />
-                        </div>
-                    </div>
+            <div class="col-sm-3">
+                <div class="search_box pull-right">
+                    <input type="text" placeholder="Search" />
                 </div>
             </div>
-        </div><!--/header-bottom-->
-    </header><!--/header-->
+        </div>
+    </div>
+</div><!--/header-bottom-->
+</header><!--/header-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-10">
+                <div class="owl-carousel owl-theme" style="margin:20px; width: 500px:">
+                    @foreach (slide sld in lstSlide)
+                    {
+                        <div class="item" style="padding-left:200px;">
+                            <a href="@sld.link">
+                                <img src="@sld.image" width="400" height="200" alt="~/Assets/Images/logo.png" />
+                            </a>
+                        </div>
+                    }
+                    <script>
+                        $(document).ready(function () {
+                            $(".owl-carousel").owlCarousel({
+                                autoplay: true,
+                                items: 1,
+                                loop: true,
+                                autoplayTimeout: 3000,
+                                dots: false
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
-    <section>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="left-sidebar">
+                    <h2>Danh mục sản phẩm </h2>
+                    <div class="panel-group category-products" id="accordian">
+                        <!--category-productsr-->
+                        @foreach (category cate in lstCate)
+                        {
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                        <a data-toggle="collapse" data-parent="#accordian" href="/Home/ListProByCate/@cate.id">
+                                            @cate.name
+                                        </a>
+                                    </h4>
+                                </div>
+                            </div>
+                        }
+                    </div><!--/category-products-->
+
+                    <div class="brands_products">
+                        <!--brands_products-->
+                        <h2>Thương hiệu</h2>
+                        <div class="brands-name">
+                            <ul class="nav nav-pills nav-stacked">
+                                @foreach (manufacturer manu in lstManu)
+                                {
+                                    <li><a href="/Home/ListProByManu/@manu.id"> <span class="pull-right">@manu.products.Count</span>@manu.name</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div><!--/brands_products-->
+
+                </div>
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <div class="features_items">
+                    @RenderBody()
+                </div>
+            </div><!--features_items-->
+        </div>
+    </div>
+</section>
+
+<footer id="footer">
+    <!--Footer-->
+    <div class="footer-widget">
         <div class="container">
             <div class="row">
                 <div class="col-sm-3">
-                    <div class="left-sidebar">
-                        <h2>Danh mục sản phẩm </h2>
-                        <div class="panel-group category-products" id="accordian">
-                            <!--category-productsr-->
-                            @foreach (category cate in lstCate)
-                            {
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
-                                        <h4 class="panel-title">
-                                            <a data-toggle="collapse" data-parent="#accordian" href="/Home/ListProByCate/@cate.id">
-                                                @cate.name
-                                            </a>
-                                        </h4>
-                                    </div>
-                                </div>
-                            }
-                        </div><!--/category-products-->
-
-                        <div class="brands_products">
-                            <!--brands_products-->
-                            <h2>Thương hiệu</h2>
-                            <div class="brands-name">
-                                <ul class="nav nav-pills nav-stacked">
-                                    @foreach (manufacturer manu in lstManu)
-                                    {
-                                        <li><a href="/Home/ListProByManu/@manu.id"> <span class="pull-right">@manu.products.Count</span>@manu.name</a></li>
-                                    }
-                                </ul>
-                            </div>
-                        </div><!--/brands_products-->
-
+                    <div class="single-widget">
+                        <h2>Dịch vụ</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Trợ giúp</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                            <li><a href="#">Trạng thái đơn hàng</a></li>
+                        </ul>
                     </div>
                 </div>
-
-                <div class="col-sm-9 padding-right">
-                    <div class="features_items">
-                        @RenderBody()
-                    </div>
-                </div><!--features_items-->
-            </div>
-        </div>
-    </section>
-
-    <footer id="footer">
-        <!--Footer-->
-        <div class="footer-widget">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-3">
-                        <div class="single-widget">
-                            <h2>Dịch vụ</h2>
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="#">Trợ giúp</a></li>
-                                <li><a href="#">Liên hệ</a></li>
-                                <li><a href="#">Trạng thái đơn hàng</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <div class="single-widget">
-                            <h2>Chính sách</h2>
-                            <ul class="nav nav-pills nav-stacked">
-                                <li><a href="#">Điều khoản sử dụng</a></li>
-                                <li><a href="#">Chính sách riêng tư</a></li>
-                                <li><a href="#">Chính sách đổi trả</a></li>
-                            </ul>
-                        </div>
+                <div class="col-sm-3">
+                    <div class="single-widget">
+                        <h2>Chính sách</h2>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="#">Điều khoản sử dụng</a></li>
+                            <li><a href="#">Chính sách riêng tư</a></li>
+                            <li><a href="#">Chính sách đổi trả</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="row">
-                    <p class="pull-left">Copyright © 2019 TmT Inc. All rights reserved.</p>
-                    <p class="pull-right">Designed by <span><a target="_blank" href="#">Thinh Nguyen</a></span></p>
-                </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row">
+                <p class="pull-left">Copyright © 2019 TmT Inc. All rights reserved.</p>
+                <p class="pull-right">Designed by <span><a target="_blank" href="#">Thinh Nguyen</a></span></p>
             </div>
         </div>
+    </div>
 
-    </footer><!--/Footer-->
+</footer><!--/Footer-->
 
 
 
-    <script src="~/Assets/Admin/js/jquery.min.js"></script>
-    <script src="~/Assets/Admin/bootstrap/js/bootstrap.min.js"></script>
-    <script src="~/Assets/Admin/js/jquery.scrollUp.min.js"></script>
-    <script src="~/Assets/Admin/js/price-range.js"></script>
-    <script src="~/Assets/Admin/js/jquery.prettyPhoto.js"></script>
-    <script src="~/Assets/Admin/js/main.js"></script>
+<script src="~/Assets/Admin/js/jquery.min.js"></script>
+<script src="~/Assets/Admin/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Assets/Admin/js/owl.carousel.min.js"></script>
+<script src="~/Assets/Admin/js/jquery.scrollUp.min.js"></script>
+<script src="~/Assets/Admin/js/price-range.js"></script>
+<script src="~/Assets/Admin/js/jquery.prettyPhoto.js"></script>
+<script src="~/Assets/Admin/js/main.js"></script>
 </body>
 </html>
