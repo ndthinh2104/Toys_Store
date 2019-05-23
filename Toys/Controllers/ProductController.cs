@@ -24,5 +24,6 @@ namespace Toys.Controllers
             var product = new ProductDAO().ViewDetail(id);
             return View(product);
         }
+
     }
 }

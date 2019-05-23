@@ -29,5 +29,10 @@ namespace Toys.Controllers
             List<product> listPro = new ProductDAO().ListProByManu(id);
             return View(listPro);
         }
+        public ActionResult SaleOff()
+        {
+            var product = new ProductDAO().ListProBySaleOff();
+            return View(product);
+        }
     }
 }

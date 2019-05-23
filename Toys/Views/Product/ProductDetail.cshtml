@@ -27,7 +27,16 @@
                                 <h2>@Model.name</h2>
                                 <p>ID: @Model.id</p>
                                 <span>
-                                    <span>@Model.price VNĐ</span>
+                                    @if (Model.price == 0)
+                                    {
+                                        <span>@Model.price_old VNĐ</span>
+                                    }
+                                    else
+                                    {
+                                        <span style="text-decoration: line-through;">@Model.price_old VNĐ</span>
+                                        <span style="color: #B22222;">@Model.price VNĐ</span>
+                                    }
+                                    
                                     <label>Số lượng:</label>
                                     <input type="number" value="1" name="amount" />
                                     <input name="id" value="@Model.id" style="display:none;">
