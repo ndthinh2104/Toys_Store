@@ -1755,11 +1755,14 @@
     <Content Include="Views\Cart\index.cshtml" />
     <Content Include="Views\Cart\update.cshtml" />
     <Content Include="Views\Home\ListProByCate.cshtml" />
+    <Content Include="Views\Home\ListProByManu.cshtml" />
+    <Content Include="Views\Home\SaleOff.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Assets\Admin\plugins\" />
+    <Folder Include="Views\ListProByManu\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Views\web.config" />

@@ -62,12 +62,14 @@
     <Compile Include="DAO\CategoryDAO.cs" />
     <Compile Include="DAO\ManufacturerDAO.cs" />
     <Compile Include="DAO\ProductDAO.cs" />
+    <Compile Include="DAO\SlideDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="Framework\bill.cs" />
     <Compile Include="Framework\bill_detail.cs" />
     <Compile Include="Framework\category.cs" />
     <Compile Include="Framework\manufacturer.cs" />
     <Compile Include="Framework\product.cs" />
+    <Compile Include="Framework\slides.cs" />
     <Compile Include="Framework\sysdiagram.cs" />
     <Compile Include="Framework\ToysDBContext.cs" />
     <Compile Include="Framework\user.cs" />

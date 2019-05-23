@@ -36,19 +36,66 @@ namespace Toys.Controllers
             return View();
         }
 
-        public ActionResult ListProByCate(int id)
+        public ActionResult ListProByCate(int id,int page = 1, int pageSize = 1)
         {
-            List<product> listPro = new ProductDAO().ListProByCate(id);
+            int totalRecord = 0;
+            List<product> listPro = new ProductDAO().ListProByCate(id, ref totalRecord, page, pageSize);
+
+
+            ViewBag.Total = totalRecord;
+            ViewBag.Page = page;
+
+            int maxPage = 5;
+            int totalPage = 0;
+
+            totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
+            ViewBag.TotalPage = totalPage;
+            ViewBag.MaxPage = maxPage;
+            ViewBag.First = 1;
+            ViewBag.Last = totalPage;
+            ViewBag.Next = page + 1;
+            ViewBag.Prev = page - 1;
+
             return View(listPro);
         }
-        public ActionResult ListProByManu(int id)
+        public ActionResult ListProByManu(int id, int page = 1, int pageSize = 1)
         {
-            List<product> listPro = new ProductDAO().ListProByManu(id);
+            int totalRecord = 0;
+            List<product> listPro = new ProductDAO().ListProByManu(id, ref totalRecord, page, pageSize);
+
+            ViewBag.Total = totalRecord;
+            ViewBag.Page = page;
+
+            int maxPage = 5;
+            int totalPage = 0;
+
+            totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
+            ViewBag.TotalPage = totalPage;
+            ViewBag.MaxPage = maxPage;
+            ViewBag.First = 1;
+            ViewBag.Last = totalPage;
+            ViewBag.Next = page + 1;
+            ViewBag.Prev = page - 1;
+
             return View(listPro);
         }
-        public ActionResult SaleOff()
+        public ActionResult SaleOff(int page = 1, int pageSize = 1)   
         {
-            var product = new ProductDAO().ListProBySaleOff();
+            int totalRecord = 0;
+            var product = new ProductDAO().ListProBySaleOff(ref totalRecord, page, pageSize);
+            ViewBag.Total = totalRecord;
+            ViewBag.Page = page;
+
+            int maxPage = 5;
+            int totalPage = 0;
+
+            totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
+            ViewBag.TotalPage = totalPage;
+            ViewBag.MaxPage = maxPage;
+            ViewBag.First = 1;
+            ViewBag.Last = totalPage;
+            ViewBag.Next = page + 1;
+            ViewBag.Prev = page - 1;
             return View(product);
         }
     }
