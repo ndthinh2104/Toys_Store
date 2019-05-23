@@ -33,13 +33,12 @@
                         <div class="overlay-content">
                             @if (item.price == 0)
                             {
-                                <h2>@item.price_old VNĐ</h2>
-                            }
+                            <h2>@String.Format("{0:0,0} VNĐ", item.price_old)</h2>                            }
                             else
                             {
-                                <h2 style="text-decoration: line-through;color: #B22222;">@item.price_old VNĐ</h2>
-                                <h2>@item.price VNĐ</h2>
-                            }
+
+ 							<h2 style="text-decoration: line-through;">@String.Format("{0:0,0} VNĐ", item.price_old)</h2>
+                            <h2 style="color: #B22222;">@String.Format("{0:0,0} VNĐ", item.price)</h2>                            }
                             <p>@item.name</p>
                             <a href="/Cart/Add/@item.id" class="btn btn-default add-to-cart">
                                 <i class="fa fa-shopping-cart"></i>

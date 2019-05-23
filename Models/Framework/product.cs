@@ -28,9 +28,9 @@
         [StringLength(500)]
         [DisplayName("Mô tả ")]
         public string description { get; set; }
-        [DisplayName("Giá sản phẩm")]
+        [DisplayName("Giá khuyến mãi")]
         public decimal price { get; set; }
-
+        [DisplayName("Giá sản phẩm")]
         public decimal? price_old { get; set; }
         [DisplayName("Danh mục")]
         public int category_id { get; set; }

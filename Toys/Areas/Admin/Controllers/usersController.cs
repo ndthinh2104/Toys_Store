@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using Models.DAO;
 using Models.Framework;
+using PagedList;
 using Toys.Common;
 
 namespace Toys.Areas.Admin.Controllers
@@ -17,11 +18,29 @@ namespace Toys.Areas.Admin.Controllers
         private ToysDBContext db = new ToysDBContext();
 
         // GET: Admin/users
-        public ActionResult Index(string searchString, int page =1, int pageSize = 10)
+        public ActionResult Index(string currentFilter, string searchString, int? page)
         {
             var dao = new UserDAO();
-            var model = dao.ListAllPaging(searchString,page, pageSize);
-            return View(db.users.ToList());
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+            var u = from s in db.users
+                     select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                u = u.Where(s => s.fullname.Contains(searchString) || s.username.ToString().Contains(searchString) || s.email.ToString().Contains(searchString));
+            }
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(u.OrderBy(s => s.id).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/users/Details/5

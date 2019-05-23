@@ -29,14 +29,13 @@
                                 <span>
                                     @if (Model.price == 0)
                                     {
-                                        <span>@Model.price_old VNĐ</span>
+										<span>@String.Format("{0:0,0} VNĐ",@Model.price_old)</span>
                                     }
                                     else
                                     {
-                                        <span style="text-decoration: line-through;color: #B22222;">@Model.price_old VNĐ</span>
-                                        <span>@Model.price VNĐ</span>
-                                    }
-                                    
+ <span style="text-decoration: line-through;">@String.Format("{0:0,0} VNĐ", @Model.price_old)</span>
+                                    <span style="color: #B22222;">@String.Format("{0:0,0} VNĐ", @Model.price)</span>                                    }
+
                                     <label>Số lượng:</label>
                                     <input type="number" value="1" name="amount" />
                                     <input name="id" value="@Model.id" style="display:none;">
@@ -59,37 +58,39 @@
                 <div class="recommended_items">
                     <!--recommended_items-->
                     <h2 class="title text-center">Cùng thương hiệu</h2>
-                    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            <div class="item active">
-                                <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-                                    <i class="fa fa-angle-left"></i>
-                                </a>
-                                @foreach (Models.Framework.product item in lst)
-                                {
-                                    <div class="col-sm-4">
-                                        <div class="product-image-wrapper">
-                                            <div class="single-products">
-                                                <div class="productinfo text-center">
-                                                    <a href="/Product/ProductDetail/@item.id"><img src="@item.big_photo" alt="" /></a>
-                                                    @if (item.price == 0)
-                                                    {
-                                                        <h2>@item.price_old VNĐ</h2>
-                                                    }
-                                                    else
-                                                    {
-                                                        <h2 style="text-decoration: line-through;color: #B22222;">@item.price_old VNĐ</h2>
-                                                        <h2>@item.price VNĐ</h2>
-                                                    }
-                                                    <a href="/Product/ProductDetail/@item.id">
-                                                        <p>@item.name</p>
-                                                    </a>
-                                                    <a class="btn btn-default add-to-cart" href="/Cart/Add/@item.id"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                                </div>
-                                            </div>
+<div class="owl-carousel owl-theme">
+                        <div class="item col-sm-12">
+                            @foreach (Models.Framework.product item in lst)
+                            {
+
+                            <div class="col-sm-4">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            <a href="/Product/ProductDetail/@item.id"><img src="@item.big_photo" alt="" /></a>
+                                            <h2>@String.Format("{0:0,0} VNĐ", item.price_old)</h2>
+                                            <a href="/Product/ProductDetail/@item.id">
+                                                <p>@item.name</p>
+                                            </a>
+                                            <a class="btn btn-default add-to-cart" href="/Cart/Add/@item.id"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
                                         </div>
                                     </div>
                                 }
+                                </div>
+                            </div>
 
 
 
@@ -99,8 +100,22 @@
                                 </a>
                             </div>
                         </div><!--/recommended_items-->
+                        }
+                        </div>
                     </div>
+                    <script>
+                        $(document).ready(function () {
+                            $(".owl-carousel").owlCarousel({
+                                autoplay: true,
+                                items: 3,
+                                loop: true,
+                                autoplayTimeout: 3000,
+                                dots: false
+                            });
+                        });
+                    </script>
                 </div>
             </div>
+        </div>
+    </div>
 </section>
-
