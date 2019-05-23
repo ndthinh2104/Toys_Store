@@ -40,6 +40,8 @@
         [StringLength(500)]
         [DisplayName("Ảnh minh họa")]
         public string big_photo { get; set; }
+        [DisplayName("Cách chơi")]
+        public string rules { get; set; }
 
         public virtual category category { get; set; }
 

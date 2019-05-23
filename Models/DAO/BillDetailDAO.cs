@@ -32,5 +32,12 @@ namespace Models.DAO
 
             }
         }
+        public bool Delete(int bill_id)
+        {
+            var bill_detail = db.bill_detail.SingleOrDefault(m => m.bill_id == bill_id);
+            db.bill_detail.Remove(bill_detail);
+            db.SaveChanges();
+            return true;
+        }
     }
 }

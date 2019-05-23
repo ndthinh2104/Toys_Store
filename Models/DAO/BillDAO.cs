@@ -14,9 +14,12 @@ namespace Models.DAO
         {
             db = new ToysDBContext();
         }
+        
         public bool Delete(int id)
         {
+            
             var bill = db.bills.Find(id);
+            
             db.bills.Remove(bill);
             db.SaveChanges();
             return true;

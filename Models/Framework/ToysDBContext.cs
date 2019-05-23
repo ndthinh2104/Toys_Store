@@ -19,6 +19,7 @@ namespace Models.Framework
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<user> users { get; set; }
         public virtual DbSet<bill_detail> bill_detail { get; set; }
+        public virtual DbSet<slide> slides { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<bill>()
