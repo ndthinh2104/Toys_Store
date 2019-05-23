@@ -58,6 +58,11 @@ namespace Models.DAO
                                 .ToList();
             return list;
         }
+        public List<product> ListProByManu(int id)
+        {
+            var list = db.products.SqlQuery(" Select * from Product where manufacturer_id = @id ", new SqlParameter("id", id)).ToList();
+            return list;
+        }
         public List<product> ListProBySaleOff(ref int totalRecord, int pageIndex = 1, int pageSize = 2)
         {
             totalRecord = db.products.SqlQuery(" Select * from Product where price <> 0 ").Count();
@@ -65,6 +70,11 @@ namespace Models.DAO
                                 .Skip((pageIndex - 1) * pageSize)
                                 .Take(pageSize)
                                 .ToList();
+            return list;
+        }
+        public List<product> ListProBySaleOff()
+        {
+            var list = db.products.SqlQuery(" Select * from Product where price <> 0 ").ToList();
             return list;
         }
     }
