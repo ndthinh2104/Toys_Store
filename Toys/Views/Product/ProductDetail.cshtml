@@ -50,12 +50,26 @@
                 </div><!--/product-details-->
 
                 <div class="category-tab shop-details-tab">
-                    <!--category-tab-->
                     <div class="col-sm-12">
-                        @Model.description
+                        <!--category-tab-->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#description" data-toggle="tab">Mô tả sản phẩm</a></li>
+                            <li><a href="#rules" data-toggle="tab">Luật chơi</a></li>
+                        </ul>
                     </div>
-                </div><!--/category-tab-->
-
+                    <div class="tab-content">
+                        <div class="tab-pane fade active in" id="description">
+                            <div class="col-sm-12">
+                                @Model.description
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="rules">
+                            <div class="col-sm-12">
+                                @Model.rules
+                            </div>
+                        </div>
+                    </div><!--/category-tab-->
+                </div>
                 <div class="recommended_items">
                     <!--recommended_items-->
                     <h2 class="title text-center">Cùng thương hiệu</h2>
@@ -81,7 +95,7 @@
                         </div>
                     </div><!--/recommended_items-->
                 </div>
-            </div>
+            
 
             <script>
                         $(document).ready(function () {

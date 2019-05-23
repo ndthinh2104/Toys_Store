@@ -1139,11 +1139,14 @@ h2.title {
     margin-top: 40px;
 }
 
-#reviews {
+#description {
     padding-left: 25px;
     padding-right: 25px;
 }
-
+#rules {
+    padding-left: 25px;
+    padding-right: 25px;
+}
 .product-details {
     margin-bottom: 40px;
     overflow: hidden;
@@ -1291,7 +1294,7 @@ h2.title {
     padding-right: 0;
 }
 
-#reviews ul {
+#description ul {
     background: #FFFFFF;
     border: 0 none;
     list-style: none outside none;
@@ -1299,52 +1302,54 @@ h2.title {
     padding: 0;
 }
 
-#reviews ul li {
+#description ul li {
     display: inline-block;
 }
 
-#reviews ul li a {
-    color: #696763;
-    display: block;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    padding-right: 15px;
-}
+    #description ul li a {
+        color: #696763;
+        display: block;
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        padding-right: 15px;
+    }
 
-#reviews ul li a i {
-    color: #4e6078;
-    padding-right: 8px;
-}
+        #description ul li a i {
+            color: #4e6078;
+            padding-right: 8px;
+        }
 
-#reviews ul li a:hover {
-    background: #fff;
-    color: #4e6078;
-}
+        #description ul li a:hover {
+            background: #fff;
+            color: #4e6078;
+        }
 
-#reviews p {
+#description p {
     color: #363432;
 }
-
-#reviews form span {
+#rules p {
+    color: #363432;
+}
+#description form span {
     display: block;
 }
 
-#reviews form span input {
-    background: #F0F0E9;
-    border: 0 none;
-    color: #A6A6A1;
-    font-family: 'Roboto', sans-serif;
-    font-size: 14px;
-    outline: medium none;
-    padding: 8px;
-    width: 48%;
-}
+    #description form span input {
+        background: #F0F0E9;
+        border: 0 none;
+        color: #A6A6A1;
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+        outline: medium none;
+        padding: 8px;
+        width: 48%;
+    }
 
-#reviews form span input:last-child {
-    margin-left: 3%;
-}
+        #description form span input:last-child {
+            margin-left: 3%;
+        }
 
-#reviews textarea {
+#description textarea {
     background: #F0F0E9;
     border: medium none;
     color: #A6A6A1;
@@ -1358,7 +1363,7 @@ h2.title {
     width: 99.5%;
 }
 
-#reviews button {
+#description button {
     background: #4e6078;
     border: 0 none;
     border-radius: 0;

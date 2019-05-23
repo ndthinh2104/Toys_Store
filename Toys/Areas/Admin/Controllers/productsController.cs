@@ -107,7 +107,7 @@ namespace Toys.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ValidateInput(false)]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,available,description,price,price_old,category_id,manufacturer_id,big_photo")] product product)
+        public ActionResult Edit([Bind(Include = "id,name,available,description,price,price_old,category_id,manufacturer_id,big_photo, rules")] product product)
         {
             if (ModelState.IsValid)
             {

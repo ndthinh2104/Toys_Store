@@ -116,33 +116,33 @@
     </div>
 </div><!--/header-bottom-->
 </header><!--/header-->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-10">
-                <div class="owl-carousel owl-theme" style="margin:20px; width: 500px:">
-                    @foreach (slide sld in lstSlide)
-                    {
-                        <div class="item" style="padding-left:200px;">
-                            <a href="@sld.link">
-                                <img src="@sld.image" width="400" height="200" alt="~/Assets/Images/logo.png" />
-                            </a>
-                        </div>
-                    }
-                    <script>
-                        $(document).ready(function () {
-                            $(".owl-carousel").owlCarousel({
-                                autoplay: true,
-                                items: 1,
-                                loop: true,
-                                autoplayTimeout: 3000,
-                                dots: false
-                            });
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="owl-carousel owl-theme" style="margin:20px; width: 500px:">
+                @foreach (slide sld in lstSlide)
+                {
+                    <div class="item" style="padding-left:200px;">
+                        <a href="@sld.link">
+                            <img src="@sld.image" width="400" height="200" alt="~/Assets/Images/logo.png" />
+                        </a>
+                    </div>
+                }
+                <script>
+                    $(document).ready(function () {
+                        $(".owl-carousel").owlCarousel({
+                            autoplay: true,
+                            items: 1,
+                            loop: true,
+                            autoplayTimeout: 3000,
+                            dots: false
                         });
-                    </script>
-                </div>
+                    });
+                </script>
             </div>
         </div>
     </div>
+</div>
 
 
 
@@ -237,8 +237,8 @@
 
 <script src="~/Assets/Admin/js/jquery.min.js"></script>
 <script src="~/Assets/Admin/bootstrap/js/bootstrap.min.js"></script>
-<script src="~/Assets/Admin/js/owl.carousel.min.js"></script>
 <script src="~/Assets/Admin/js/jquery.scrollUp.min.js"></script>
+<script src="~/Assets/Admin/js/owl.carousel.min.js"></script>
 <script src="~/Assets/Admin/js/price-range.js"></script>
 <script src="~/Assets/Admin/js/jquery.prettyPhoto.js"></script>
 <script src="~/Assets/Admin/js/main.js"></script>
