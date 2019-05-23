@@ -20,6 +20,7 @@ namespace Toys.Areas.Admin.Controllers
         public ViewResult Index(string currentFilter, string searchString, int? page)
         {
             var products = db.products.Include(p => p.category).Include(p => p.manufacturer);
+            
             if (searchString != null)
             {
                 page = 1;

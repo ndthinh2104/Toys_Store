@@ -8,18 +8,37 @@ using System.Web;
 using System.Web.Mvc;
 using Models.DAO;
 using Models.Framework;
+using PagedList;
 
 namespace Toys.Areas.Admin.Controllers
 {
-    public class billsController : Controller
+    public class billsController : BaseController
     {
         private ToysDBContext db = new ToysDBContext();
 
         // GET: Admin/bills
-        public ActionResult Index()
+        public ActionResult Index(string currentFilter, string searchString, int? page)
         {
             var bill_detail = db.bill_detail.Include(b => b.bill).Include(b => b.product);
-            return View(bill_detail.ToList());
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+            var a = from s in db.bill_detail
+                     select s;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                a = a.Where(s => s.bill.name.Contains(searchString) || s.price.ToString().Contains(searchString) || s.bill_id.ToString().Contains(searchString));
+            }
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(a.OrderBy(s => s.bill_id).ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Admin/bills/Details/5
@@ -101,9 +120,10 @@ namespace Toys.Areas.Admin.Controllers
 
         // GET: Admin/bills/Delete/5
         [HttpDelete]
-        public ActionResult Delete(int bill_id)
+        public ActionResult Delete(int id, int bill_id)
         {
-            new BillDAO().Delete(bill_id);
+            new BillDetailDAO().Delete(bill_id);
+            new BillDAO().Delete(id);
             return RedirectToAction("Index");
         }
 

@@ -1,8 +1,10 @@
-﻿@model IEnumerable<Models.Framework.bill_detail>
+﻿@model PagedList.IPagedList<Models.Framework.bill_detail>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    
 }
 
 @section header {
@@ -28,40 +30,49 @@
                 </div>
                 <table class="table table-hover text-center crud">
                     <tr>
-                        <th style="border-top:none;">@Html.DisplayNameFor(model => model.bill_id)</th>
-                        <th style="border-top:none;">@Html.DisplayNameFor(model => model.product.name)</th>
-                        <th style="border-top:none;">@Html.DisplayNameFor(model => model.amount)</th>
-                        <th style="border-top:none;">@Html.DisplayNameFor(model => model.price)</th>
-                        <th style="border-top:none;">@Html.DisplayNameFor(model => model.address)</th>
-                        <th style="border-top:none;">@Html.DisplayNameFor(model => model.bill.status)</th>
-                        <th style="border-top:none;">@Html.DisplayNameFor(model => model.bill.create_date)</th>
+                        <th style="border-top:none;">Mã đơn hàng</th>
+                        <th style="border-top:none;">Tên sản phẩm</th>
+                        <th style="border-top:none;">Số lượng</th>
+                        <th style="border-top:none;">Giá</th>
+                        <th style="border-top:none;">Địa chỉ</th>
+                        <th style="border-top:none;">Trạng thái đơn hàng</th>
+                        <th style="border-top:none;">Ngày đặt</th>
                     </tr>
                     @foreach (var item in Model)
                     {
+                        
 
-                    <tr id="row_@item.bill_id">
-                        <td>@Html.DisplayFor(modelItem => item.bill_id)</td>
-                        <td>@Html.DisplayFor(modelItem => item.product.name)</td>
-                        <td>@Html.DisplayFor(modelItem => item.amount)</td>
-                        <td>@Html.DisplayFor(modelItem => item.price)</td>
-                        <td>@Html.DisplayFor(modelItem => item.address)</td>
-                        <td>@Html.DisplayFor(modelItem => item.bill.status)</td>
-                        <td>@Html.DisplayFor(modelItem => item.bill.create_date)</td>
-                        <td><button class="btn btn-success">@Html.ActionLink("Sửa", "Edit", new { id = item.bill_id }, new { @style = "color:#fff" })</button></td>
-                        <td>
-                            <button class="btn btn-danger">
-                                @Ajax.ActionLink("Xóa","Delete",new {@id = item.bill_id },new AjaxOptions
-                           {
-                               Confirm = "Bạn có muốn xóa bản ghi này không ?",
-                               OnComplete = "$('#row_"+@item.bill_id + "').remove()",
-                               HttpMethod = "Delete"
-                           })
-                            </button>
-                        </td>
-                    </tr>
+                        <tr id="row_@item.bill_id">
+                            <td>@Html.DisplayFor(modelItem => item.bill_id)</td>
+                            <td>@Html.DisplayFor(modelItem => item.product.name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.amount)</td>
+                            <td>
+                                @{ 
+                                    var new_price = String.Format("{0:0,0} VNĐ", item.price);
+                                }
+                            @new_price
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.bill.address)</td>
+                            <td>@Html.DisplayFor(modelItem => item.bill.status)</td>
+                            <td>@Html.DisplayFor(modelItem => item.bill.create_date)</td>
+                            <td>
+                                <button class="btn btn-danger">
+                                    @Ajax.ActionLink("Xóa", "Delete", new {@id = item.bill.id, @bill_id = item.bill_id },new AjaxOptions
+                               {
+                                   Confirm = "Bạn có muốn xóa bản ghi này không ?",
+                                   OnComplete = "$('#row_"+@item.bill.id + "').remove()",
+                                   HttpMethod = "Delete"
+                               })
+                                </button>
+                            </td>
+                        </tr>
                     }
 
                 </table>
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+                    new { page, currentFilter = ViewBag.CurrentFilter }))
             </div>
             <!-- /.box-body -->
         </div>
