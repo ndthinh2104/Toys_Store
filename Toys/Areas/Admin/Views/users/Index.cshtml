@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Models.Framework.user>
+﻿@model PagedList.IPagedList<Models.Framework.user>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -7,64 +8,68 @@
 
 @section header {
     Quản lý người dùng
-    }
+}
 
-        <div class="row" style="padding:10px;">
-            <div class="col-xs-12">
-                <div class="box">
-                    <div class="box-header">
-                        <h3 class="box-title">Danh sách thành viên</h3>
-                    </div>
-                    <!-- /.box-header -->
-                    <div class="box-body table-responsive" style="padding:15px;">
-                        
-                        <div class="box-tools">
-                            <button class="btn btn-default" style="margin:10px;">@Html.ActionLink("Thêm mới", "Create")</button>
-                                <div class="input-group input-group-sm col-md-6" style="width: 250px; float:right;">
-                                    <input type="text" name="searchString" class="form-control pull-right" placeholder="Search">
-                                    <div class="input-group-btn">
-                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                    </div>
-                                </div>
-                        </div>
-                        <table class="table table-hover text-center crud">
-                            <tr>
-                                <th style="border-top:none;">@Html.DisplayNameFor(model => model.id)</th>
-                                <th style="border-top:none;">@Html.DisplayNameFor(model => model.username)</th>
-                                <th style="border-top:none;">@Html.DisplayNameFor(model => model.fullname)</th>
-                                <th style="border-top:none;">@Html.DisplayNameFor(model => model.address)</th>
-                                <th style="border-top:none;">@Html.DisplayNameFor(model => model.email)</th>
-                                <th style="border-top:none;">@Html.DisplayNameFor(model => model.phone)</th>
-                            </tr>
-                            @foreach (var item in Model)
-                            {
-                            <tr id="row_@item.id">
-                                <td>@Html.DisplayFor(modelItem => item.id)</td>
-                                <td>@Html.DisplayFor(modelItem => item.username)</td>
-                                <td>@Html.DisplayFor(modelItem => item.fullname)</td>
-                                <td>@Html.DisplayFor(modelItem => item.address)</td>
-                                <td>@Html.DisplayFor(modelItem => item.email)</td>
-                                <td>@Html.DisplayFor(modelItem => item.phone)</td>
-
-                                <td><button class="btn btn-success">@Html.ActionLink("Sửa", "Edit", new { id = item.id }, new { @style = "color:#fff" })</button></td>
-                                <td>
-                                    <button class="btn btn-danger">
-                                        @Ajax.ActionLink("Xóa","Delete",new {@id = item.id },new AjaxOptions
-                                   {
-                                       Confirm = "Bạn có muốn xóa bản ghi này không ?",
-                                       OnComplete = "$('#row_"+@item.id+"').remove()",
-                                       HttpMethod = "Delete"
-                                   })
-                                    </button>
-                                </td>
-                            </tr>
-                            }
-
-                        </table>
-                    </div>
-                    <!-- /.box-body -->
-                </div>
-                <!-- /.box -->
+<div class="row" style="padding:10px;">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Danh sách thành viên</h3>
             </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive" style="padding:15px;">
+
+                <div class="box-tools">
+                    <button class="btn btn-info fa fa-plus" style="margin:10px;">@Html.ActionLink(" Thêm mới", "Create")</button>
+                    <div class="input-group input-group-sm col-md-6" style="width: 250px; float:right;">
+                        <input type="text" name="searchString" class="form-control pull-right" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover text-center crud">
+                    <tr>
+                        <th style="border-top:none;">Mã</th>
+                        <th style="border-top:none;">Tên đăng nhập</th>
+                        <th style="border-top:none;">Họ và tên</th>
+                        <th style="border-top:none;">Địa chỉ</th>
+                        <th style="border-top:none;">Email</th>
+                        <th style="border-top:none;">Số điện thoại</th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="row_@item.id">
+                            <td>@Html.DisplayFor(modelItem => item.id)</td>
+                            <td>@Html.DisplayFor(modelItem => item.username)</td>
+                            <td>@Html.DisplayFor(modelItem => item.fullname)</td>
+                            <td>@Html.DisplayFor(modelItem => item.address)</td>
+                            <td>@Html.DisplayFor(modelItem => item.email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.phone)</td>
+
+                            <td><button class="btn btn-success">@Html.ActionLink("Sửa", "Edit", new { id = item.id }, new { @style = "color:#fff" })</button></td>
+                            <td>
+                                <button class="btn btn-danger">
+                                    @Ajax.ActionLink("Xóa","Delete",new {@id = item.id },new AjaxOptions
+                               {
+                                   Confirm = "Bạn có muốn xóa bản ghi này không ?",
+                                   OnComplete = "$('#row_"+@item.id+"').remove()",
+                                   HttpMethod = "Delete"
+                               })
+                                </button>
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+                @Html.PagedListPager(Model, page => Url.Action("Index",
+                    new { page, currentFilter = ViewBag.CurrentFilter }))
+            </div>
+            <!-- /.box-body -->
         </div>
+        <!-- /.box -->
+    </div>
+</div>
 

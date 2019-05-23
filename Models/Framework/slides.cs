@@ -14,8 +14,10 @@
         [DisplayName("ID")]
         public int? id { get; set; }
         [StringLength(100)]
+        [DisplayName("Đường dẫn")]
         public string link { get; set; }
         [StringLength(100)]
+        [DisplayName("Ảnh")]
         public string image { get; set; }
         
     }

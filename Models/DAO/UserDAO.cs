@@ -48,16 +48,9 @@ namespace Models.DAO
         }
         public List<user> ListAll()
         {
-            return db.users.OrderBy(x => x.id).ToList();
-        }
-        public IEnumerable<user> ListAllPaging(string searchString, int page, int pageSize)
-        {
-            IQueryable<user> model = db.users;
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                model = model.Where(x => x.username.Contains(searchString) || x.fullname.Contains(searchString));
-            }
-            return model.OrderBy(x => x.id).ToPagedList(page, pageSize);
+            var list = db.users.OrderBy(x => x.id).ToList();
+            return list;
+            
         }
         public user GetUserByID(string username)
         {
