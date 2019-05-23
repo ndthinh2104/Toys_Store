@@ -24,9 +24,15 @@ namespace Models.DAO
             return true;
         }
 
+        public List<product> ListAll(ref int totalRecord,int pageIndex =1,int pageSize=2)
+        {
+            totalRecord = db.products.OrderBy(x => x.id).Count();
+            var list =db.products.OrderBy(x => x.id).Skip((pageIndex-1)*pageSize).Take(pageSize).ToList();
+            return list;
+        }
         public List<product> ListAll()
         {
-            var list =db.products.OrderBy(x => x.id).ToList();
+            var list = db.products.OrderBy(x => x.id).ToList();
             return list;
         }
 

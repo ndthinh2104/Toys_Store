@@ -33,8 +33,8 @@
                                     }
                                     else
                                     {
-                                        <span style="text-decoration: line-through;">@Model.price_old VNĐ</span>
-                                        <span style="color: #B22222;">@Model.price VNĐ</span>
+                                        <span style="text-decoration: line-through;color: #B22222;">@Model.price_old VNĐ</span>
+                                        <span>@Model.price VNĐ</span>
                                     }
                                     
                                     <label>Số lượng:</label>
@@ -72,12 +72,20 @@
                                             <div class="single-products">
                                                 <div class="productinfo text-center">
                                                     <a href="/Product/ProductDetail/@item.id"><img src="@item.big_photo" alt="" /></a>
-                                                    <h2>@item.price VNĐ</h2>
+                                                    @if (item.price == 0)
+                                                    {
+                                                        <h2>@item.price_old VNĐ</h2>
+                                                    }
+                                                    else
+                                                    {
+                                                        <h2 style="text-decoration: line-through;color: #B22222;">@item.price_old VNĐ</h2>
+                                                        <h2>@item.price VNĐ</h2>
+                                                    }
                                                     <a href="/Product/ProductDetail/@item.id">
                                                         <p>@item.name</p>
                                                     </a>
-                                                        <a class="btn btn-default add-to-cart" href="/Cart/Add/@item.id"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-</div>
+                                                    <a class="btn btn-default add-to-cart" href="/Cart/Add/@item.id"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

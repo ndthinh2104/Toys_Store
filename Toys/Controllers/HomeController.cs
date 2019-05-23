@@ -5,17 +5,34 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Models.Framework;
+using PagedList;
 
 namespace Toys.Controllers
 {
     public class HomeController : Controller
     {
         // GET: Home
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 2)
         {
-            var list = new ProductDAO().ListAll();
+            int totalRecord = 0;
+            var list = new ProductDAO().ListAll(ref totalRecord,page, pageSize);
             ViewBag.Products = list;
-            
+
+
+            ViewBag.Total = totalRecord;
+            ViewBag.Page = page;
+
+            int maxPage = 5;
+            int totalPage = 0;
+
+            totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
+            ViewBag.TotalPage = totalPage;
+            ViewBag.MaxPage = maxPage;
+            ViewBag.First = 1;
+            ViewBag.Last = totalPage;
+            ViewBag.Next = page + 1;
+            ViewBag.Prev = page - 1;
+
             return View();
         }
 
