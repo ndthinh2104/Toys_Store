@@ -2476,3 +2476,10 @@ img.girl.img-responsive {
 .pagi-nav {
 
 }
+.frm-login a {
+    color: #4e6078;
+    font-style: italic;
+}
+    .frm-login a:hover, .frm-login a:active, .frm-login a:focus {
+        color: #5b89c6;
+    }
