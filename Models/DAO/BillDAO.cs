@@ -18,8 +18,7 @@ namespace Models.DAO
         public bool Delete(int id)
         {
             
-            var bill = db.bills.Find(id);
-            
+            var bill = db.bills.SingleOrDefault(m => m.id == id);
             db.bills.Remove(bill);
             db.SaveChanges();
             return true;
