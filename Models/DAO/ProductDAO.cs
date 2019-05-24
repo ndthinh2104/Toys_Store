@@ -1,4 +1,5 @@
 ﻿using Models.Framework;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -24,24 +25,15 @@ namespace Models.DAO
             return true;
         }
 
-        public List<product> ListAll(ref int totalRecord,int pageIndex =1,int pageSize=2)
-        {
-            totalRecord = db.products.OrderBy(x => x.id).Count();
-            var list =db.products.OrderBy(x => x.id).Skip((pageIndex-1)*pageSize).Take(pageSize).ToList();
-            return list;
-        }
         public List<product> ListAll()
         {
             var list = db.products.OrderBy(x => x.id).ToList();
             return list;
         }
 
-        public List<product> ListProByCate(int id, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
+        public List<product> ListProByCate(int id)
         {
-            totalRecord = db.products.OrderBy(x => x.id).Count();
             var list = db.products.SqlQuery(" Select * from Product where category_id = @id ", new SqlParameter("id",id))
-                                .Skip((pageIndex - 1) * pageSize)
-                                .Take(pageSize)
                                 .ToList();
             return list;
         }
@@ -49,29 +41,13 @@ namespace Models.DAO
         {
             return db.products.Find(id);
         }
-        public List<product> ListProByManu(int id, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
-        {
-            totalRecord = db.products.SqlQuery(" Select * from Product where manufacturer_id = @id ", new SqlParameter("id", id)).Count();
-            var list = db.products.SqlQuery(" Select * from Product where manufacturer_id = @id ", new SqlParameter("id", id))
-                                .Skip((pageIndex - 1) * pageSize)
-                                .Take(pageSize)
-                                .ToList();
-            return list;
-        }
+
         public List<product> ListProByManu(int id)
         {
             var list = db.products.SqlQuery(" Select * from Product where manufacturer_id = @id ", new SqlParameter("id", id)).ToList();
             return list;
         }
-        public List<product> ListProBySaleOff(ref int totalRecord, int pageIndex = 1, int pageSize = 2)
-        {
-            totalRecord = db.products.SqlQuery(" Select * from Product where price <> 0 ").Count();
-            var list = db.products.SqlQuery(" Select * from Product where price <> 0 ")
-                                .Skip((pageIndex - 1) * pageSize)
-                                .Take(pageSize)
-                                .ToList();
-            return list;
-        }
+
         public List<product> ListProBySaleOff()
         {
             var list = db.products.SqlQuery(" Select * from Product where price <> 0 ").ToList();

@@ -12,91 +12,43 @@ namespace Toys.Controllers
     public class HomeController : Controller
     {
         // GET: Home
-        public ActionResult Index(int page = 1, int pageSize = 6)
+        public ActionResult Index(int? page = 1, int pageSize = 6)
         {
-            int totalRecord = 0;
-            var list = new ProductDAO().ListAll(ref totalRecord,page, pageSize);
-            ViewBag.Products = list;
-
-
-            ViewBag.Total = totalRecord;
-            ViewBag.Page = page;
-
-            int maxPage = 5;
-            int totalPage = 0;
-
-            totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
-            ViewBag.TotalPage = totalPage;
-            ViewBag.MaxPage = maxPage;
-            ViewBag.First = 1;
-            ViewBag.Last = totalPage;
-            ViewBag.Next = page + 1;
-            ViewBag.Prev = page - 1;
-
-            return View();
+            int pageNumber = page ?? 1;
+            List<product> list = new ProductDAO().ListAll();
+            var listpro = list.ToPagedList(pageNumber, pageSize);
+            IPagedList<product> pagePro = new StaticPagedList<product>(listpro
+    ,pageNumber, pageSize, list.Count());
+            return View(pagePro);
         }
 
-        public ActionResult ListProByCate(int id,int page = 1, int pageSize = 6)
+        public ActionResult ListProByCate(int id, int? page = 1, int pageSize = 6)
         {
-            int totalRecord = 0;
-            List<product> listPro = new ProductDAO().ListProByCate(id, ref totalRecord, page, pageSize);
+            int pageNumber = page ?? 1;
+            List<product> list = new ProductDAO().ListProByCate(id);
+            var listpro = list.ToPagedList(pageNumber, pageSize);
+            IPagedList<product> pagePro = new StaticPagedList<product>(listpro
+    , pageNumber, pageSize, list.Count());
 
-
-            ViewBag.Total = totalRecord;
-            ViewBag.Page = page;
-
-            int maxPage = 5;
-            int totalPage = 0;
-
-            totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
-            ViewBag.TotalPage = totalPage;
-            ViewBag.MaxPage = maxPage;
-            ViewBag.First = 1;
-            ViewBag.Last = totalPage;
-            ViewBag.Next = page + 1;
-            ViewBag.Prev = page - 1;
-
-            return View(listPro);
+            return View(pagePro);
         }
-        public ActionResult ListProByManu(int id, int page = 1, int pageSize = 6)
+        public ActionResult ListProByManu(int id, int? page = 1, int pageSize = 6)
         {
-            int totalRecord = 0;
-            List<product> listPro = new ProductDAO().ListProByManu(id, ref totalRecord, page, pageSize);
-
-            ViewBag.Total = totalRecord;
-            ViewBag.Page = page;
-
-            int maxPage = 5;
-            int totalPage = 0;
-
-            totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
-            ViewBag.TotalPage = totalPage;
-            ViewBag.MaxPage = maxPage;
-            ViewBag.First = 1;
-            ViewBag.Last = totalPage;
-            ViewBag.Next = page + 1;
-            ViewBag.Prev = page - 1;
-
-            return View(listPro);
+            int pageNumber = page ?? 1;
+            List<product> list = new ProductDAO().ListProByManu(id);
+            var listpro = list.ToPagedList(pageNumber, pageSize);
+            IPagedList<product> pagePro = new StaticPagedList<product>(listpro
+, pageNumber, pageSize, list.Count());
+            return View(pagePro);
         }
-        public ActionResult SaleOff(int page = 1, int pageSize = 6)   
+        public ActionResult SaleOff(int? page = 1, int pageSize = 6)   
         {
-            int totalRecord = 0;
-            var product = new ProductDAO().ListProBySaleOff(ref totalRecord, page, pageSize);
-            ViewBag.Total = totalRecord;
-            ViewBag.Page = page;
-
-            int maxPage = 5;
-            int totalPage = 0;
-
-            totalPage = (int)Math.Ceiling((double)(totalRecord / pageSize));
-            ViewBag.TotalPage = totalPage;
-            ViewBag.MaxPage = maxPage;
-            ViewBag.First = 1;
-            ViewBag.Last = totalPage;
-            ViewBag.Next = page + 1;
-            ViewBag.Prev = page - 1;
-            return View(product);
+            int pageNumber = page ?? 1;
+            List<product> list = new ProductDAO().ListProBySaleOff();
+            var listpro = list.ToPagedList(pageNumber, pageSize);
+            IPagedList<product> pagePro = new StaticPagedList<product>(listpro
+, pageNumber, pageSize, list.Count());
+            return View(pagePro);
         }
     }
 }
