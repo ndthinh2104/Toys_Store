@@ -174,7 +174,6 @@ a:active,
 a:focus {
   outline: none;
   text-decoration: none;
-  color: #72afd2;
 }
 /* Page Header */
 .page-header {
@@ -2246,11 +2245,11 @@ a:focus {
   background-color: #00c0ef;
   border-color: #00acd6;
 }
-.btn-info:hover,
-.btn-info:active,
-.btn-info.hover {
-  background-color: #00acd6;
-}
+    .btn-info:hover,
+    .btn-info:active,
+    .btn-info.hover {
+        background-color: #00ACB0;
+    }
 .btn-danger {
   background-color: #dd4b39;
   border-color: #d73925;

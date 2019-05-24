@@ -70,6 +70,7 @@ namespace Toys.Areas.Admin.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [ValidateInput(false)]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,name,available,description,price,price_old,category_id,manufacturer_id,big_photo")] product product)
         {

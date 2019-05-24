@@ -45,6 +45,7 @@ CKEDITOR.editorConfig = function( config ) {
     config.syntaxhighlight_lang = 'csharp';
     config.syntaxhighlight_hideControls = true;
     config.enterMode = CKEDITOR.ENTER_BR;
+    config.fillEmptyBlocks = false;
     config.language = 'vi';
     config.filebrowserBrowseUrl = '/Assets/Plugins/ckfinder/ckfinder.html';
     config.filebrowserImageBrowseUrl = '/Assets/Plugins/ckfinder/ckfinder.html?Type=Images';
