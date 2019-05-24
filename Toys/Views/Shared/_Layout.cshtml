@@ -28,7 +28,7 @@
     <link href="~/Assets/Admin/css/owl.theme.default.min.css" rel="stylesheet">
     <link href="~/Assets/Admin/css/font-awesome.css" rel="stylesheet">
     <link href="~/Assets/Admin/css/prettyPhoto.css" rel="stylesheet">
-    <link href="~/Assets/Admin/css/AdminLTE.css" rel="stylesheet" />
+
     <link href="~/Assets/Admin/css/price-range.css" rel="stylesheet">
     <link href="~/Assets/Admin/css/animate.css" rel="stylesheet">
     <link href="~/Assets/Admin/css/main.css" rel="stylesheet">
@@ -121,7 +121,7 @@
                     @using (Html.BeginForm("Search", "Product", FormMethod.Get))
                     {
 
-                        @Html.TextBox("SearchString") <input type="submit" value="Tìm kiếm" />
+                        @Html.TextBox("SearchString") <input type="submit" value="Tìm kiếm" style="float-left"/>
 
                     }
 
@@ -249,26 +249,35 @@
 </footer><!--/Footer-->
 
 <div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog" style="width: 400px; margin-top: 70px; ">
+    <div class="modal-dialog">
+
         <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header" style="border: none;">
+            <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><p class="login-box-msg">ĐĂNG NHẬP</p></h4>
             </div>
             <div class="modal-body">
+                <body class="hold-transition login-page">
                     <div class="login-box">
                         <!-- /.login-logo -->
-                        <div class="login-box-body">
-                            <p class="login-box-msg" style=" font-size: 24px; ">ĐĂNG NHẬP</p>
+                        <div class="login-box-body"> 
                             <form method="post" id="form-dn">
 
                                 <div class="form-group has-feedback">
-                                    <input class="form-control" id="UserName" name="UserName" placeholder="Tên đăng Nhập" autofocus required />
+                                    <input id="UserName" name="UserName" placeholder="Tên đăng Nhập" autofocus required />
                                 </div>
                                 <div class="form-group has-feedback">
-                                    <input class="form-control" type="password" id="Password" name="Password" placeholder="Mật Khẩu" />
+                                    <input type="password" id="Password" name="Password" placeholder="Mật Khẩu" />
                                 </div>
                                 <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="checkbox icheck">
+                                            <label>
+                                                <button type="button" class="btn btn-primary btn-block btn-flat">Đăng ký</button>
+                                            </label>
+                                        </div>
+                                    </div>
                                     <!-- /.col -->
                                     <div class="col-xs-12" style=" padding-bottom: 15px;">
                                         <button type="submit" class="btn btn-primary btn-block btn-flat" id="submit1">Đăng nhập</button>
@@ -276,23 +285,19 @@
                                     <!-- /.col -->
                                 </div>
                             </form>
-                            <div class="row">
-                                <div class="col-sm-6 col-xs-6 frm-login text-left" style=" padding-left: 25px; ">
-                                    <a href="#">Đăng ký</a><br>
-                                </div>
-                                <div class="col-sm-6 col-xs-6 pull-right frm-login text-right">
-                                    <a href="#">Quên mật khẩu ?</a><br>
-                                </div>
-                            </div>
 
 
-                            
+                            <a href="#">Quên mật khẩu ?</a><br>
                         </div>
                         <!-- /.login-box-body -->
                     </div>
                     <!-- /.login-box -->
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
         </div>
+
     </div>
 </div>
 
