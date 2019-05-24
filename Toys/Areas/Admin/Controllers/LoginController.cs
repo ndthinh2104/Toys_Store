@@ -41,5 +41,10 @@ namespace Toys.Areas.Admin.Controllers
             }
             return View("Index");
         }
+        public ActionResult Logout()
+        {
+            Session[CommonConstant.USER_SESSION] = null;
+            return Redirect("/Admin/Login");
+        }
     }
 }
