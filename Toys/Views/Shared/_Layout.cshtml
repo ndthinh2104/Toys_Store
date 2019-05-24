@@ -303,6 +303,7 @@
 <script src="~/Assets/Admin/js/price-range.js"></script>
 <script src="~/Assets/Admin/js/jquery.prettyPhoto.js"></script>
 <script src="~/Assets/Admin/js/main.js"></script>
+    @RenderSection("script",false)
 </body>
 </html>
 <script>
@@ -319,7 +320,7 @@
                 method:'post',
                 success: (data) => {
                     if (data.ret > 0) {
-                        window.location.href = '/home/index'
+                        window.location.reload();
                     } else {
                         swal({
                                 title: 'Thất bại',

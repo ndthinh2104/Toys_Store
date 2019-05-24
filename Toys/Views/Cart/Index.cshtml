@@ -64,3 +64,10 @@
         </form>
     </div>
 </section> <!--/#cart_items-->
+@section script{
+    <script>
+        $(".cart_quantity_input").on('change', function () {
+            if ($(this).val() < 0) $(this).val(0);
+        });
+    </script>
+}
