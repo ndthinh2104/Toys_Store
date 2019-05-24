@@ -118,7 +118,13 @@
             </div>
             <div class="col-sm-3">
                 <div class="search_box pull-right">
-                    <input type="text" placeholder="Search" />
+                    @using (Html.BeginForm("Search", "Product", FormMethod.Get))
+                    {
+
+                        @Html.TextBox("SearchString") <input type="submit" value="Tìm kiếm" />
+
+                    }
+
                 </div>
             </div>
         </div>

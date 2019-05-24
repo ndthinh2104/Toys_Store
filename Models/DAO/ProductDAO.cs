@@ -53,5 +53,10 @@ namespace Models.DAO
             var list = db.products.SqlQuery(" Select * from Product where price <> 0 ").ToList();
             return list;
         }
+        public List<product> Search(string SearchString)
+        {
+            var list = db.products.SqlQuery(" Select * from Product").Where(x=>x.name.Contains(SearchString)).ToList();
+            return list;
+        }
     }
 }
