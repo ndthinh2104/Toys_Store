@@ -20,6 +20,7 @@
 
 
     <h2 class="title text-center">Danh sách sản phẩm</h2>
+<div class="col-sm-12">
 @foreach (var item in Model)
 
 {
@@ -57,6 +58,7 @@
     </a>
 
 }
+</div>
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
 
 

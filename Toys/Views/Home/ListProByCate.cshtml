@@ -7,35 +7,38 @@
 @using PagedList.Mvc;
 
 <h2 class="title text-center">Danh sách sản phẩm</h2>
-@foreach (product item in Model)
-{
-    var url = "/Product/ProductDetail/" + item.id;
-    <a href="@url">
-        <div class="col-sm-4">
-            <div class="product-image-wrapper">
-                <div class="single-products">
-                    <div class="productinfo text-center">
-                        <img src="@item.big_photo" alt="~/Assets/Images/logo.png" />
-                    </div>
-                    <div class="product-overlay">
-                        <div class="overlay-content">
-                            @if (item.price == 0)
-                            {
-                                <h2>@String.Format("{0:0,0} VNĐ", item.price_old)</h2> }
-                            else
-                            {
-                                <h2 style="text-decoration: line-through;">@String.Format("{0:0,0} VNĐ", item.price_old)</h2>
-                                <h2 style="color: #B22222;">@String.Format("{0:0,0} VNĐ", item.price)</h2>
-                            }
-                            <p>@item.name</p>
-                            <a href="/Cart/Add/@item.id" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+
+<div class="col-sm-12">
+
+    @foreach (product item in Model)
+    {
+        var url = "/Product/ProductDetail/" + item.id;
+        <a href="@url">
+            <div class="col-sm-4">
+                <div class="product-image-wrapper">
+                    <div class="single-products">
+                        <div class="productinfo text-center">
+                            <img src="@item.big_photo" alt="~/Assets/Images/logo.png" />
+                        </div>
+                        <div class="product-overlay">
+                            <div class="overlay-content">
+                                @if (item.price == 0)
+                                {
+                                    <h2>@String.Format("{0:0,0} VNĐ", item.price_old)</h2> }
+                                else
+                                {
+                                    <h2 style="text-decoration: line-through;">@String.Format("{0:0,0} VNĐ", item.price_old)</h2>
+                                    <h2 style="color: #B22222;">@String.Format("{0:0,0} VNĐ", item.price)</h2>
+                                }
+                                <p>@item.name</p>
+                                <a href="/Cart/Add/@item.id" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </a>
+        </a>
 
-}
-
-@Html.PagedListPager(Model, page => Url.Action("ListProByCate", new { page }))
+    }
+    </div>
+    @Html.PagedListPager(Model, page => Url.Action("ListProByCate", new { page }))
