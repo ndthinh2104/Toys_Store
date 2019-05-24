@@ -33,10 +33,10 @@ namespace Toys.Areas.Admin.Controllers
             ViewBag.CurrentFilter = searchString;
             var sp = from s in db.products
                     select s;
-            
-            if(!String.IsNullOrEmpty(searchString))
+
+            if (!String.IsNullOrEmpty(searchString))
             {
-                sp = sp.Where(s => s.name.Contains(searchString) || s.price.ToString().Contains(searchString) || s.id.ToString().Contains(searchString));
+                sp = sp.Where(s => s.name.Contains(searchString) || s.category.name.Contains(searchString) || s.manufacturer.name.Contains(searchString) || s.price.ToString().Contains(searchString) || s.id.ToString().Contains(searchString));
             }
             int pageSize = 5;
             int pageNumber = (page ?? 1);

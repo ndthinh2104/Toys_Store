@@ -34,7 +34,7 @@ namespace Toys.Areas.Admin.Controllers
                      select s;
             if (!String.IsNullOrEmpty(searchString))
             {
-                a = a.Where(s => s.bill.name.Contains(searchString) || s.price.ToString().Contains(searchString) || s.bill_id.ToString().Contains(searchString));
+                a = a.Where(s => s.product.name.Contains(searchString) || s.bill.address.ToString().Contains(searchString) || s.bill_id.ToString().Contains(searchString));
             }
             int pageSize = 10;
             int pageNumber = (page ?? 1);
