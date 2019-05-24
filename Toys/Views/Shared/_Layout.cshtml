@@ -68,9 +68,16 @@
                             </a>
 
                             </li>
-                            @if (Session["username"] != null)
+                                @{ 
+                                    var session = (UserLogin)Session[Toys.Common.CommonConstant.USER_SESSION];
+                                }
+                            @if (session != null)
                             {
-                                <li><p style="background: #FFFFFF;color: #696763;font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: 300;padding: 0;padding-right: 0;margin-top: 10px;">Xin Chào, @Session["username"]</p></li>
+                                <li>
+                                    <p style="background: #FFFFFF;color: #696763;font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: 300;padding: 0;padding-right: 0;margin-top: 10px;">
+                                    Xin Chào, @session.UserName
+                                    </p>
+                                </li>
                                 <li><a href="/User/logOut"><button class="btn btn-info btn-sm">Đăng xuất</button></a></li>
                             }
                             else
@@ -225,7 +232,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="single-widget">
-                        <h2>Chính sách</h2>
+                        <h2>Địa chỉ</h2>
                         <ul class="nav nav-pills nav-stacked">
                             <li><a href="#">Điều khoản sử dụng</a></li>
                             <li><a href="#">Chính sách riêng tư</a></li>
@@ -249,11 +256,12 @@
 </footer><!--/Footer-->
 
 <div id="myModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 400px; margin-top: 70px; ">
 
         <!-- Modal content-->
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header" style="border: none;">
+
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title"><p class="login-box-msg">ĐĂNG NHẬP</p></h4>
             </div>
@@ -261,14 +269,18 @@
                 <body class="hold-transition login-page">
                     <div class="login-box">
                         <!-- /.login-logo -->
-                        <div class="login-box-body"> 
+                        <div class="login-box-body">
+                            <p class="login-box-msg" style=" font-size: 24px; ">ĐĂNG NHẬP</p>
+
                             <form method="post" id="form-dn">
 
                                 <div class="form-group has-feedback">
-                                    <input id="UserName" name="UserName" placeholder="Tên đăng Nhập" autofocus required />
+                                    <input class="form-control" id="UserName" name="UserName" placeholder="Tên đăng Nhập" autofocus required />
+
                                 </div>
                                 <div class="form-group has-feedback">
-                                    <input type="password" id="Password" name="Password" placeholder="Mật Khẩu" />
+                                    <input class="form-control" type="password" id="Password" name="Password" placeholder="Mật Khẩu" />
+
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">
@@ -281,13 +293,20 @@
                                     <!-- /.col -->
                                     <div class="col-xs-12" style=" padding-bottom: 15px;">
                                         <button type="submit" class="btn btn-primary btn-block btn-flat" id="submit1">Đăng nhập</button>
+
                                     </div>
                                     <!-- /.col -->
                                 </div>
                             </form>
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-6 frm-login text-left" style=" padding-left: 25px; ">
+                                    <a href="#">Đăng ký</a><br>
+                                </div>
+                                <div class="col-sm-6 col-xs-6 pull-right frm-login text-right">
+                                    <a href="#">Quên mật khẩu ?</a><br>
+                                </div>
+                            </div>
 
-
-                            <a href="#">Quên mật khẩu ?</a><br>
                         </div>
                         <!-- /.login-box-body -->
                     </div>
@@ -297,7 +316,6 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
-
     </div>
 </div>
 
