@@ -1,12 +1,13 @@
 ﻿@using Models.Framework
 @using Models.DAO
 @using Toys.Models;
-@{ 
+@{
+
     CategoryDAO dao = new CategoryDAO();
     List<category> lstCate = dao.ListAll();
     ManufacturerDAO dao1 = new ManufacturerDAO();
     List<manufacturer> lstManu = dao1.ListAll();
-    cart cart = (cart) Session["Cart"];
+    cart cart = (cart)Session["Cart"];
     int soLuong = 0;
     if (cart != null) { soLuong = cart.getSoLuong(); }
     SlideDAO sldao = new SlideDAO();
@@ -64,11 +65,19 @@
                                     <a href="~/Cart/Index">
                                         <i class="fa fa-shopping-cart"></i><span style="font-size: 9px;display: inline-block;background: #384aeb;color: #fff;padding: 0px 5px;border-radius: 50;position: absolute;top: -8px;right: -12px;
 ">@soLuong</span>
-</a>
+                            </a>
 
-</li>
-<li><a href="~/admin/login"><i class="fa fa-sign-in"></i> Đăng nhập</a></li>
-</ul>
+                            </li>
+                            @if (Session["username"] != null)
+                            {
+                                <li><p style="background: #FFFFFF;color: #696763;font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: 300;padding: 0;padding-right: 0;margin-top: 10px;">Xin Chào, @Session["username"]</p></li>
+                                <li><a href="/User/logOut"><button class="btn btn-info btn-sm">Đăng xuất</button></a></li>
+                            }
+                            else
+                            {
+                                <li><button id="btn-login" class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModal" ><i class="fa fa-sign-in"></i> Đăng nhập</button></li>  
+                            }                               
+                            </ul>
 </div>
 </div>
 </div>
@@ -119,7 +128,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-10">
-            <div class="owl-carousel owl-theme" style="margin:20px; width: 500px:">
+            <div class="owl-carousel owl-theme" style="margin:20px; width: 100%;">
                 @foreach (slide sld in lstSlide)
                 {
                     <div class="item" style="padding-left:200px;">
@@ -233,8 +242,60 @@
 
 </footer><!--/Footer-->
 
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><p class="login-box-msg">ĐĂNG NHẬP</p></h4>
+            </div>
+            <div class="modal-body">
+                <body class="hold-transition login-page">
+                    <div class="login-box">
+                        <!-- /.login-logo -->
+                        <div class="login-box-body"> 
+                            <form method="post" id="form-dn">
+
+                                <div class="form-group has-feedback">
+                                    <input id="UserName" name="UserName" placeholder="Tên đăng Nhập" autofocus required />
+                                </div>
+                                <div class="form-group has-feedback">
+                                    <input type="password" id="Password" name="Password" placeholder="Mật Khẩu" />
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="checkbox icheck">
+                                            <label>
+                                                <button type="button" class="btn btn-primary btn-block btn-flat">Đăng ký</button>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <!-- /.col -->
+                                    <div class="col-xs-12" style=" padding-bottom: 15px;">
+                                        <button type="submit" class="btn btn-primary btn-block btn-flat" id="submit1">Đăng nhập</button>
+                                    </div>
+                                    <!-- /.col -->
+                                </div>
+                            </form>
 
 
+                            <a href="#">Quên mật khẩu ?</a><br>
+                        </div>
+                        <!-- /.login-box-body -->
+                    </div>
+                    <!-- /.login-box -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
 <script src="~/Assets/Admin/js/jquery.min.js"></script>
 <script src="~/Assets/Admin/bootstrap/js/bootstrap.min.js"></script>
 <script src="~/Assets/Admin/js/jquery.scrollUp.min.js"></script>
@@ -244,3 +305,33 @@
 <script src="~/Assets/Admin/js/main.js"></script>
 </body>
 </html>
+<script>
+    $('#form-dn').on("submit", function () {
+            var data = {
+                UserName: $('#UserName').val()
+                , Password: $('#Password').val()
+            }
+            console.log("data: ", data);
+            $.ajax({
+                url: "/User/Login",
+                dataType: 'json',
+                data: data,
+                method:'post',
+                success: (data) => {
+                    if (data.ret > 0) {
+                        window.location.href = '/home/index'
+                    } else {
+                        swal({
+                                title: 'Thất bại',
+                                text: 'Tài Khoản hoặc mật khẩu không chính xác',
+                                type: 'error',
+                                timer: 1500
+                            });
+                    }
+                },
+                error: (xhr, status, err) => {
+                    console.log(err.toString());
+                }
+            });
+        });
+</script>

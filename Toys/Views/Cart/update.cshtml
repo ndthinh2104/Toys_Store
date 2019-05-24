@@ -1,4 +1,5 @@
 ﻿@using Toys.Models
+@using Models.Framework
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,6 +9,16 @@
         cart = new cart();
     }
     List<CartItem> lst = cart.lstcart;
+    user u = new user();
+    u.fullname = "";
+    u.gender = 1;
+    u.email = "";
+    u.phone = "";
+    u.address = "";
+    if (Session["User"]!= null)
+    {
+        u = (user)Session["User"];
+    }
 }
 
 <section id="cart_items">
@@ -72,29 +83,36 @@
 
                         <div class="form-group col-md-10">
                             <label for="name">Họ tên*</label>
-                            <input type="text" class="form-control" name="name" placeholder="Họ tên" value="" required>
+                            <input type="text" class="form-control" name="name" placeholder="Họ tên" value="@u.fullname" required>
                         </div>
                         <div class="form-group col-md-10">
                             <label>Giới tính </label>
-                            <input id="gender" type="radio" class="input-radio" name="gender" value="1" checked="checked" style="width: 10%"><span style="margin-right: 10%">Nam</span>
-                            <input id="gender" type="radio" class="input-radio" name="gender" value="0" style="width: 10%"><span>Nữ</span>
-
+                            @if (u.gender == 1)
+                            {
+                                <input id="gender" type="radio" class="input-radio" name="gender" value="1" checked="checked" style="width: 10%"><span style="margin-right: 10%">Nam</span>
+                                <input id="gender" type="radio" class="input-radio" name="gender" value="0" style="width: 10%"><span>Nữ</span>
+                            }
+                            else if (u.gender == 0)
+                            {
+                                <input id="gender" type="radio" class="input-radio" name="gender" value="1"  style="width: 10%"><span style="margin-right: 10%">Nam</span>
+                                <input id="gender" type="radio" class="input-radio" name="gender" value="0" checked="checked" style="width: 10%"><span>Nữ</span>
+                            }
                         </div>
 
                         <div class="form-group col-md-10">
                             <label for="email">Email*</label>
-                            <input class="form-control" type="email" id="email" name="email" required value="" placeholder="Nhập Email">
+                            <input class="form-control" type="email" id="email" name="email" required value="@u.email" placeholder="Nhập Email">
                         </div>
 
                         <div class="form-group col-md-10">
                             <label for="adress">Địa chỉ*</label>
-                            <input class="form-control" type="text" id="address" name="address" placeholder="Nhập địa chỉ" value="" required>
+                            <input class="form-control" type="text" id="address" name="address" placeholder="Nhập địa chỉ" value="@u.address" required>
                         </div>
 
 
                         <div class="form-group col-md-10">
                             <label for="phone">Điện thoại*</label>
-                            <input class="form-control" type="text" id="phone" name="phone" placeholder="Nhập số điện thoại" value="" required>
+                            <input class="form-control" type="text" id="phone" name="phone" placeholder="Nhập số điện thoại" value="@u.phone" required>
                         </div>
 
                         <div class="form-group col-md-10">
