@@ -50,5 +50,9 @@ namespace Toys.Controllers
 , pageNumber, pageSize, list.Count());
             return View(pagePro);
         }
+        public ActionResult Contact()
+        {
+            return View();
+        }
     }
 }

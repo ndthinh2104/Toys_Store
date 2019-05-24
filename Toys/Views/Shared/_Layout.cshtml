@@ -60,12 +60,12 @@
                     <div class="col-md-8 clearfix">
                         <div class="shop-menu clearfix pull-right">
                             <ul class="nav navbar-nav">
-                                <li><a href="~/Cart/Index"> Giỏ hàng</a></li>
                                 <li>
                                     <a href="~/Cart/Index">
-                                        <i class="fa fa-shopping-cart"></i><span style="font-size: 9px;display: inline-block;background: #384aeb;color: #fff;padding: 0px 5px;border-radius: 50;position: absolute;top: -8px;right: -12px;
-">@soLuong</span>
-                            </a>
+                                        <i class="fa fa-shopping-cart"></i>
+                                        <span style="font-size: 9px;display: inline-block;background: #384aeb;color: #fff;padding: 0px 5px;border-radius: 50px;position: absolute;top: -8px;right: -12px;">@soLuong
+                                        </span>
+                                    </a>
 
                             </li>
                                 @{ 
@@ -78,7 +78,10 @@
                                     Xin Chào, @session.UserName
                                     </p>
                                 </li>
-                                <li><a href="/User/logOut"><button class="btn btn-info btn-sm">Đăng xuất</button></a></li>
+                                <li><a class="btn btn-info btn-sm" href="/User/logOut" style="border: none;">
+                                        Đăng xuất
+                                    </a>
+                                </li>
                             }
                             else
                             {
@@ -119,7 +122,7 @@
                             </ul>
                         </li>
                         <li><a href="/Home/SaleOff">Khuyến mãi</a></li>
-                        <li><a href="#">Liên hệ</a></li>
+                        <li><a href="/Home/Contact">Liên hệ</a></li>
                     </ul>
                 </div>
             </div>
@@ -128,7 +131,10 @@
                     @using (Html.BeginForm("Search", "Product", FormMethod.Get))
                     {
 
-                        @Html.TextBox("SearchString") <input type="submit" value="Tìm kiếm" style="float-left"/>
+                        @Html.TextBox("SearchString")
+                        <button class="btn btn-default" type="submit" value="Tìm kiếm" style="float-left">
+                            <i class="fa fa-search"></i>
+                        </button>
 
                     }
 
@@ -224,20 +230,19 @@
                     <div class="single-widget">
                         <h2>Dịch vụ</h2>
                         <ul class="nav nav-pills nav-stacked">
-                            <li><a href="#">Trợ giúp</a></li>
-                            <li><a href="#">Liên hệ</a></li>
-                            <li><a href="#">Trạng thái đơn hàng</a></li>
+                            <li><a href="/Home/Contact">Liên hệ</a></li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-sm-3">
+                <div class="col-sm-6">
                     <div class="single-widget">
-                        <h2>Địa chỉ</h2>
-                        <ul class="nav nav-pills nav-stacked">
-                            <li><a href="#">Điều khoản sử dụng</a></li>
-                            <li><a href="#">Chính sách riêng tư</a></li>
-                            <li><a href="#">Chính sách đổi trả</a></li>
-                        </ul>
+                        <h2>Thông tin liên hệ</h2>
+                        <h6 class="contact-title">Địa chỉ</h6>
+                        <p>
+                            236 Hoàng Quốc Việt, Bắc Từ Liêm,
+                            <br>
+                            Hà Nội
+                        </p>
                     </div>
                 </div>
             </div>
@@ -263,14 +268,13 @@
             <div class="modal-header" style="border: none;">
 
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><p class="login-box-msg">ĐĂNG NHẬP</p></h4>
             </div>
             <div class="modal-body">
-                <body class="hold-transition login-page">
+                <div class="hold-transition login-page text-center">
                     <div class="login-box">
                         <!-- /.login-logo -->
                         <div class="login-box-body">
-                            <p class="login-box-msg" style=" font-size: 24px; ">ĐĂNG NHẬP</p>
+                            <p class="login-box-msg" style=" font-size: 24px; margin-bottom:30px; ">ĐĂNG NHẬP</p>
 
                             <form method="post" id="form-dn">
 
@@ -283,13 +287,6 @@
 
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="checkbox icheck">
-                                            <label>
-                                                <button type="button" class="btn btn-primary btn-block btn-flat">Đăng ký</button>
-                                            </label>
-                                        </div>
-                                    </div>
                                     <!-- /.col -->
                                     <div class="col-xs-12" style=" padding-bottom: 15px;">
                                         <button type="submit" class="btn btn-primary btn-block btn-flat" id="submit1">Đăng nhập</button>
@@ -311,9 +308,6 @@
                         <!-- /.login-box-body -->
                     </div>
                     <!-- /.login-box -->
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
