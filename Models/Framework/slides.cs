@@ -15,9 +15,11 @@
         public int? id { get; set; }
         [StringLength(100)]
         [DisplayName("Đường dẫn")]
+        [Required(ErrorMessage = "Đường dẫn không được để trống")]
         public string link { get; set; }
         [StringLength(100)]
         [DisplayName("Ảnh")]
+        [Required(ErrorMessage = "Ảnh không được để trống")]
 
         public string image { get; set; }
         

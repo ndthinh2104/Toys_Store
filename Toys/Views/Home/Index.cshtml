@@ -1,9 +1,11 @@
-﻿@model PagedList.IPagedList<Models.Framework.product>
+﻿@model List<Models.Framework.product>
+@model PagedList.IPagedList<Models.Framework.product>
 @using PagedList.Mvc;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     var products = (List<Models.Framework.product>)ViewBag.Products;
     var message = Session["message"];
+
 }
 @if (message != null)
 {
@@ -17,8 +19,9 @@
 
 
 
-
+    <h2 class="title text-center">Danh sách sản phẩm</h2>
 @foreach (var item in Model)
+
 {
     var url = "/Product/ProductDetail/" + item.id;
     <a href="@url">
@@ -32,12 +35,15 @@
                         <div class="overlay-content">
                             @if (item.price == 0)
                             {
+
                                 <h2>@String.Format("{0:0,0} VNĐ", item.price_old)</h2> }
                             else
                             {
 
-                                <h2 style="text-decoration: line-through;">@String.Format("{0:0,0} VNĐ", item.price_old)</h2>
-                                <h2 style="color: #B22222;">@String.Format("{0:0,0} VNĐ", item.price)</h2>}
+ 							<h2 style="text-decoration: line-through;">@String.Format("{0:0,0} VNĐ", item.price_old)</h2>
+                            <h2 style="color: #B22222;">@String.Format("{0:0,0} VNĐ", item.price)</h2>                            
+							}
+
                             <p>@item.name</p>
                             <a href="/Cart/Add/@item.id" class="btn btn-default add-to-cart">
                                 <i class="fa fa-shopping-cart"></i>
@@ -52,4 +58,5 @@
 
 }
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
 

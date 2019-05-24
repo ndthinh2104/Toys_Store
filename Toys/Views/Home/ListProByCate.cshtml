@@ -2,9 +2,11 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 @model  PagedList.IPagedList<Models.Framework.product>
 @using PagedList.Mvc;
-<h2>List Product By Category</h2>
+
+<h2 class="title text-center">Danh sách sản phẩm</h2>
 @foreach (product item in Model)
 {
     var url = "/Product/ProductDetail/" + item.id;
@@ -35,4 +37,5 @@
     </a>
 
 }
+
 @Html.PagedListPager(Model, page => Url.Action("ListProByCate", new { page }))
