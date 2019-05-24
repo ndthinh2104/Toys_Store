@@ -18,6 +18,7 @@
         [DisplayName("ID")]
         public int id { get; set; }
         [DisplayName("Tên nhà sản xuất")]
+        [Required(ErrorMessage = "Tên nhà sản xuất không được để trống")]
         [StringLength(50)]
         public string name { get; set; }
 

@@ -18,7 +18,7 @@
         [DisplayName("ID")]
         public int id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Tên sản phẩm không được để trống")]
         [StringLength(100)]
         [DisplayName("Tên sản phẩm")]
         public string name { get; set; }
@@ -26,11 +26,16 @@
         public int? available { get; set; }
 
         [StringLength(500)]
+        [Required(ErrorMessage = "Mô tả sản phẩm không được để trống")]
         [DisplayName("Mô tả ")]
         public string description { get; set; }
+
         [DisplayName("Giá khuyến mãi")]
+        [Required(ErrorMessage = "Giá khuyến mãi không được để trống")]
         public decimal price { get; set; }
+        
         [DisplayName("Giá sản phẩm")]
+        [Required(ErrorMessage = "Giá sản phẩm không được để trống")]
         public decimal? price_old { get; set; }
         [DisplayName("Danh mục")]
         public int category_id { get; set; }
@@ -38,6 +43,7 @@
         public int manufacturer_id { get; set; }
 
         [StringLength(500)]
+        [Required(ErrorMessage = "Ảnh sản phẩm không được để trống")]
         [DisplayName("Ảnh minh họa")]
         public string big_photo { get; set; }
         [DisplayName("Cách chơi")]

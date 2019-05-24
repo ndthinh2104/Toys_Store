@@ -3,7 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @model List<Models.Framework.product>
-<h2>List Product By Category</h2>
+<h2 class="title text-center">Danh sách sản phẩm</h2>
 @foreach (product item in Model)
 {
     var url = "/Product/ProductDetail/" + item.id;
