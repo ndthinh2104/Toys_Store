@@ -5,22 +5,27 @@ using System.Web;
 using System.Web.Mvc;
 using Models.DAO;
 using Models.Framework;
+using Toys.Areas.Admin.Models;
+using Toys.Common;
+
 namespace Toys.Controllers
 {
     public class UserController : Controller
     {
-        public JsonResult Login(string UserName, string Password)
+        [HttpPost]
+        public JsonResult Login(LoginModel model)
         {
 
             int ret = -1;
-            Password = Common.Encryptor.MD5Hash(Password);
-            UserDAO user = new UserDAO();
-            if (user.Login(UserName, Password))
+            var dao = new UserDAO();
+            var result = dao.Login(model.username, Encryptor.MD5Hash(model.password));
+            if (result)
             {
-                user u = new user();
-                u = user.GetUserByID(UserName);
-                Session["username"] = u.fullname;
-                Session["User"] = u;
+                var user = dao.GetUserByID(model.username);
+                var userSession = new UserLogin();
+                userSession.UserName = user.fullname;
+                userSession.UserID = user.id;
+                Session.Add(CommonConstant.USER_SESSION, userSession);
                 ret = 1;
             }
 
@@ -31,9 +36,8 @@ namespace Toys.Controllers
         }
         public ActionResult logOut()
         {
-            Session["username"] = null;
-            Session["User"] = null;
-            return Redirect("/home/index");
+            Session[CommonConstant.USER_SESSION] = null;
+            return Redirect("/Home/Index");
         }
 
 

@@ -29,7 +29,7 @@ namespace Toys.Areas.Admin.Controllers
                 {
                     var user = dao.GetUserByID(model.username);
                     var userSession = new UserLogin();
-                    userSession.UserName = user.username;
+                    userSession.UserName = user.fullname;
                     userSession.UserID = user.id;
                     Session.Add(CommonConstant.USER_SESSION, userSession);
                     return RedirectToAction("Index", "Home");

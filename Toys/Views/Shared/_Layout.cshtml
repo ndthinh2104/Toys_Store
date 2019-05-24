@@ -68,9 +68,16 @@
                             </a>
 
                             </li>
-                            @if (Session["username"] != null)
+                                @{ 
+                                    var session = (UserLogin)Session[Toys.Common.CommonConstant.USER_SESSION];
+                                }
+                            @if (session != null)
                             {
-                                <li><p style="background: #FFFFFF;color: #696763;font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: 300;padding: 0;padding-right: 0;margin-top: 10px;">Xin Chào, @Session["username"]</p></li>
+                                <li>
+                                    <p style="background: #FFFFFF;color: #696763;font-family: 'Roboto', sans-serif;font-size: 14px;font-weight: 300;padding: 0;padding-right: 0;margin-top: 10px;">
+                                    Xin Chào, @session.UserName
+                                    </p>
+                                </li>
                                 <li><a href="/User/logOut"><button class="btn btn-info btn-sm">Đăng xuất</button></a></li>
                             }
                             else
@@ -225,7 +232,7 @@
                 </div>
                 <div class="col-sm-3">
                     <div class="single-widget">
-                        <h2>Chính sách</h2>
+                        <h2>Địa chỉ</h2>
                         <ul class="nav nav-pills nav-stacked">
                             <li><a href="#">Điều khoản sử dụng</a></li>
                             <li><a href="#">Chính sách riêng tư</a></li>
@@ -271,7 +278,7 @@
                                 <div class="row">
                                     <!-- /.col -->
                                     <div class="col-xs-12" style=" padding-bottom: 15px;">
-                                        <button type="submit" class="btn btn-primary btn-block btn-flat" id="submit1">Đăng nhập</button>
+                                        <button type="submit" class="btn btn-primary btn-block btn-flat" id="submit">Đăng nhập</button>
                                     </div>
                                     <!-- /.col -->
                                 </div>
@@ -283,10 +290,7 @@
                                 <div class="col-sm-6 col-xs-6 pull-right frm-login text-right">
                                     <a href="#">Quên mật khẩu ?</a><br>
                                 </div>
-                            </div>
-
-
-                            
+                            </div>  
                         </div>
                         <!-- /.login-box-body -->
                     </div>
