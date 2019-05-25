@@ -26,6 +26,7 @@ namespace Toys.Controllers
                 userSession.UserName = user.fullname;
                 userSession.UserID = user.id;
                 Session.Add(CommonConstant.USER_SESSION, userSession);
+                Session["User"] = user;
                 ret = 1;
             }
 
