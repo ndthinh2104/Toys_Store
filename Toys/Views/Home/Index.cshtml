@@ -9,11 +9,9 @@
 }
 @if (message != null)
 {
-    <script type="text/javascript">
-    $(document).ready(function () {
-        alert("@message");
-    });
-    </script>
+<div class="alert alert-success" role="alert">
+    @message
+</div>
     Session["message"] = null;
 }
 

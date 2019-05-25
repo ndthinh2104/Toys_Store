@@ -39,37 +39,34 @@
                         <th style="border-top:none;">Số lượng</th>
                         <th style="border-top:none;">Giá</th>
                         <th style="border-top:none;">Địa chỉ</th>
-                        <th style="border-top:none;">Trạng thái đơn hàng</th>
                         <th style="border-top:none;">Ngày đặt</th>
                     </tr>
+                    
                     @foreach (var item in Model)
                     {
-
-
-                        <tr id="row_@item.bill_id">
-                            <td>@Html.DisplayFor(modelItem => item.bill_id)</td>
-                            <td>@Html.DisplayFor(modelItem => item.product.name)</td>
-                            <td>@Html.DisplayFor(modelItem => item.amount)</td>
-                            <td>
-                                @{ 
-                                    var new_price = String.Format("{0:0,0} VNĐ", item.price);
-                                }
+                    <tr id="row_@item.bill_id">
+                        <td>@Html.DisplayFor(modelItem => item.bill_id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.product.name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.amount)</td>
+                        <td>
+                            @{
+                                var new_price = String.Format("{0:0,0} VNĐ", item.price);
+                            }
                             @new_price
-                            </td>
-                            <td>@Html.DisplayFor(modelItem => item.bill.address)</td>
-                            <td>@Html.DisplayFor(modelItem => item.bill.status)</td>
-                            <td>@Html.DisplayFor(modelItem => item.bill.create_date)</td>
-                            <td>
-                                <button class="btn btn-danger">
-                                    @Ajax.ActionLink("Xóa", "Delete", new { @id = item.bill.id, @bill_id = item.bill_id }, new AjaxOptions
-                               {
-                                   Confirm = "Bạn có muốn xóa bản ghi này không ?",
-                                   OnComplete = "$('#row_" + @item.bill.id + "').remove()",
-                                   HttpMethod = "Delete"
-                               })
-                                </button>
-                            </td>
-                        </tr>
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => item.bill.address)</td>
+                        <td>@Html.DisplayFor(modelItem => item.bill.create_date)</td>
+                        <td>
+                            <button class="btn btn-danger">
+                                @Ajax.ActionLink("Xóa", "Delete", new { @id = item.bill.id, @bill_id = item.bill_id }, new AjaxOptions
+                           {
+                               Confirm = "Bạn có muốn xóa bản ghi này không ?",
+                               OnComplete = "$('#row_" + @item.bill.id + "').remove()",
+                               HttpMethod = "Delete"
+                           })
+                            </button>
+                        </td>
+                    </tr>
                                         }
 
                 </table>
@@ -83,4 +80,16 @@
         <!-- /.box -->
     </div>
 </div>
+<style>
+    .unprocessed {
+        background-color: #dd4b39;
+        border-color: #d73925;
+        color: #fff;
+    }
+    .processed {
+        background-color: #008d4c;
+        border-color: #00a65a;
+        color: #fff;
+    }
+</style>
 

@@ -54,21 +54,18 @@
                                     <h4>@item.name</h4>
                                 </td>
                                 <td class="cart_price">
-                                    <p>@item.price VNĐ</p>
+                                    <p>@String.Format("{0:0,0} VNĐ", item.price)</p>
                                 </td>
                                 <td class="cart_quantity">
                                     <p>@item.Amount</p>
                                 </td>
                                 <td class="cart_total">
-                                    <p class="cart_total_price">@total VNĐ</p>
+                                    <p class="cart_total_price">@String.Format("{0:0,0} VNĐ", total)</p>
                                 </td>
 
 
                             </tr>
                         }
-
-
-
 
                     </tbody>
                 </table>

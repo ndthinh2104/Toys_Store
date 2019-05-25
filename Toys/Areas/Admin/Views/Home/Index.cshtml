@@ -72,7 +72,6 @@
                         <th style="border-top:none;">Tên sản phẩm</th>
                         <th style="border-top:none;">Số lượng</th>
                         <th style="border-top:none;">Giá </th>
-                        <th style="border-top:none;">Trạng thái đơn hàng </th>
                         <th style="border-top:none;">Ngày đặt</th>
                     </tr>
                     @foreach (var item in bills)
@@ -83,9 +82,7 @@
                         <td>@Html.DisplayFor(modelItem => item.product.name)</td>
                         <td>@Html.DisplayFor(modelItem => item.amount)</td>
                         <td>@Html.DisplayFor(modelItem => item.price)</td>
-                        <td>@Html.DisplayFor(modelItem => item.bill.status)</td>
                         <td>@Html.DisplayFor(modelItem => item.bill.create_date)</td>
-                        <td><button class="btn btn-success">@Html.ActionLink("Sửa", "Edit", "bills", new { id = item.bill_id }, new { @style = "color:#fff" })</button></td>
                         <td>
                             <button class="btn btn-danger">
                                 @Ajax.ActionLink("Xóa","Delete","bills",new {@id = item.bill_id },new AjaxOptions
