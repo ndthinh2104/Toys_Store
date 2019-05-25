@@ -116,10 +116,10 @@ namespace Toys.Controllers
             }
 
             int stt = db.SaveChanges();
-            string message = "Luư dữ liệu lỗi";
+            string message = "Đặt hàng bị lỗi";
             if (stt > 0)
             {
-                 message = "Lưu dữ liệu thành công";
+                 message = "Đặt Hàng Thành công";
             }
             Session["message"] = message;
             Session["Cart"] = null;
