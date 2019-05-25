@@ -1,0 +1,160 @@
+﻿
+@{
+    ViewBag.Title = "register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="review-payment col-md-10" style="width:100%">
+    <h2>Tạo tài khoản</h2>
+</div>
+
+<form action="/User/signUp" method="post" id="form-sign-up">
+    <div style="width:60%">
+        <div class="space20">&nbsp;</div>
+        <div class="form-group col-md-10">
+            <label for="name">Tên đăng nhập*</label>
+            <input type="text" class="form-control" name="username" id="username" placeholder="Tên đăng nhập" >
+        </div>
+        <div class="form-group col-md-10">
+            <label for="name">Mật Khẩu*</label>
+            <input type="password" class="form-control" name="Password" id="Password" placeholder="Mật Khẩu" >
+        </div>
+        <div class="form-group col-md-10">
+            <label for="name">Nhập lại Mật Khẩu*</label>
+            <input type="password" class="form-control" name="Password-re" id="Password_re" placeholder="Mật Khẩu nhập lại" >
+        </div>
+        <div class="form-group col-md-10">
+            <label for="name">Họ tên*</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="Họ tên" >
+        </div>
+        <div class="form-group col-md-10">
+            <label>Giới tính </label>
+
+            <input id="gender" type="radio" class="input-radio" name="gender" value="1" style="width: 10%"><span style="margin-right: 10%">Nam</span>
+            <input id="gender" type="radio" class="input-radio" name="gender" value="0" checked="checked" style="width: 10%"><span>Nữ</span>
+
+        </div>
+
+        <div class="form-group col-md-10">
+            <label for="email">Email*</label>
+            <input class="form-control" type="text" id="email" name="email" required placeholder="Nhập Email">
+        </div>
+
+        <div class="form-group col-md-10">
+            <label for="adress">Địa chỉ*</label>
+            <input class="form-control" type="text" id="address" name="address" placeholder="Nhập địa chỉ" >
+        </div>
+
+
+        <div class="form-group col-md-10">
+            <label for="phone">Điện thoại*</label>
+            <input class="form-control" type="text" id="phone" name="phone" placeholder="Nhập số điện thoại" >
+        </div>
+    </div>
+    <div class="form-group col-md-10">
+        <input class="btn btn-success" type="submit" value="Đăng Kí" />
+    </div>
+
+</form>
+
+@section script
+{
+    <script type="text/javascript">
+
+    $(document).ready(function() {
+        $("#form-sign-up").validate({
+                    rules: {
+                        username: "required",
+                        name: "required",
+                        gender: "required",
+                        address: {
+                            required: true,
+                            minlength: 2
+                        },
+                        phone: {
+                            required: true,
+                            minlength: 5
+                        },
+                        Password: {
+                            required: true,
+                            minlength: 5
+                        },
+                        Password_re: {
+                            required: true,
+                            minlength: 5,
+                            equalTo: "#Password"
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                    },
+                    messages: {
+                        username: "Vui lòng nhập Tên đăng nhập",
+                        name: "Vui lòng nhập tên đầy đủ của bạn",
+                        gender: "Vui lòng nhập giới tính của bạn",
+                        address: {
+                            required: "Vui lòng nhập địa chỉ",
+                            minlength: "Vui lòng nhập địa chỉ đúng của bạn"
+                        },
+                        phone: {
+                            required: "Vui lòng nhập số điện thoại",
+                            minlength: "Số máy quý khách vừa nhập là số không có thực"
+                        },
+                        Password: {
+                            required: 'Vui lòng nhập mật khẩu',
+                            minlength: 'Vui lòng nhập ít nhất 5 kí tự'
+                        },
+                        Password_re: {
+                            required: 'Vui lòng nhập mật khẩu',
+                            minlength: 'Vui lòng nhập ít nhất 5 kí tự',
+                            equalTo: 'Mật khẩu không trùng'
+                        },
+                        email: {
+                            required: 'Vui lòng nhập email',
+                            minlength: 'Email chính xác có ít nhất 7 kí tự',
+                            email: 'Email không đúng định dạng'
+                        }
+                    }
+                });
+        $('#form-sign-up').on("submit", function () {
+            var isvalid = $("#form-sign-up").valid();
+            if (isvalid == true) {
+                var data = {
+                    userName: $('#username').val()
+                    , password: $('#Password').val()
+                    , name: $('#name').val()
+                    , gender: $('#gender').val()
+                    , address: $('#address').val()
+                    , phone: $('#phone').val()
+                    , email: $('#email').val(),
+                }
+                console.log("data: ", data);
+                $.ajax({
+                    url: "/User/signUp",
+                    dataType: 'json',
+                    data: data,
+                    method: 'post',
+                    success: (data) => {
+                        if (data.ret > 0) {
+
+                            window.location.href = '/home/index';
+                        } else {
+                            swal({
+                                title: 'Thất bại',
+                                text: 'Bạn đã đăng kí tài khoản chưa thành công',
+                                type: 'error',
+                                timer: 1500
+                            });
+                        }
+                    },
+                    error: (xhr, status, err) => {
+                        console.log(err.toString());
+                    }
+                });
+            }
+
+        });
+    });
+    </script>
+}

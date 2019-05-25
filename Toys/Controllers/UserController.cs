@@ -40,6 +40,36 @@ namespace Toys.Controllers
             return Redirect("/Home/Index");
         }
 
+        public ActionResult register()
+        {
+            return View();
+        }
+        public JsonResult signUp(string username,string password,string name,int gender,string address,string phone,string email)
+        {
+            ToysDBContext db = new ToysDBContext();
+            int ret = -1;
 
+            user user = new user();
+            user.address = address;
+            user.email = email;
+            user.username = username;
+            user.gender = gender;
+            user.fullname = name;
+            user.password = Encryptor.MD5Hash(password);
+            user.permission = 0;
+            user.phone = phone;
+
+            db.users.Add(user);
+            int stt = db.SaveChanges();
+
+            if (stt > 0)
+            {
+                ret = 1;
+            }
+            return Json(new
+            {
+                ret //ok
+            }, JsonRequestBehavior.AllowGet); ;
+        }
     }
 }
