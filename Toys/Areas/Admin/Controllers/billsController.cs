@@ -126,6 +126,15 @@ namespace Toys.Areas.Admin.Controllers
             new BillDAO().Delete(id);
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public JsonResult checkStatus(int id)
+        {
+            var result = new BillDAO().changeStatus(id);
+            return Json(new
+            {
+                status = result
+            });
+        }
 
         protected override void Dispose(bool disposing)
         {

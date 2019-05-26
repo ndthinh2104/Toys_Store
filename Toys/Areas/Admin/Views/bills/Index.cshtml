@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
-    
+
 }
 
 @section header {
@@ -42,8 +42,19 @@
                         <th style="border-top:none;">Trạng thái đơn hàng</th>
                         <th style="border-top:none;">Ngày đặt</th>
                     </tr>
+
                     @foreach (var item in Model)
                     {
+
+                        var stt = "";
+                        if (item.bill.status == true)
+                        {
+                            stt = "processed";
+                        }
+                        else
+                        {
+                            stt = "unprocessed";
+                        }
 
 
                         <tr id="row_@item.bill_id">
@@ -51,13 +62,16 @@
                             <td>@Html.DisplayFor(modelItem => item.product.name)</td>
                             <td>@Html.DisplayFor(modelItem => item.amount)</td>
                             <td>
-                                @{ 
+                                @{
                                     var new_price = String.Format("{0:0,0} VNĐ", item.price);
                                 }
-                            @new_price
+                                @new_price
                             </td>
+
                             <td>@Html.DisplayFor(modelItem => item.bill.address)</td>
-                            <td>@Html.DisplayFor(modelItem => item.bill.status)</td>
+                            <td class="@stt">
+                                <a href="#" class="btn-active" data-id="@item.bill_id">@(item.bill.status ? "Đã xử lý" : "Chưa xử lý")</a>
+                            </td>
                             <td>@Html.DisplayFor(modelItem => item.bill.create_date)</td>
                             <td>
                                 <button class="btn btn-danger">
@@ -70,7 +84,7 @@
                                 </button>
                             </td>
                         </tr>
-                                        }
+                    }
 
                 </table>
                 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
@@ -83,4 +97,50 @@
         <!-- /.box -->
     </div>
 </div>
+<style>
+    .processed {
+        color: #fff;
+        background-color: #449d44;
+        border-color: #398439;
+    }
+
+    .unprocessed {
+        color: #fff;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+    }
+</style>
+@section jsFooter {
+    <script>
+        var bill = {
+            init: function () {
+                bill.registerEvents();
+            },
+            registerEvents: function () {
+                $('.btn-active').off('click').on('click', function (e) {
+                    e.preventDefault();
+                    var btn = $(this);
+                    var id = $(this).data('id');
+                    $.ajax({
+                        url: "/bills/checkStatus",
+                        data: { id: id },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (response) {
+                            if (response.status == true) {
+                                btn.text('Đã xử lý');
+                            }
+                            else {
+                                btn.text('Chưa xử lý');
+                            }
+                            window.location.reload();
+                        }
+                    });
+                });
+            }
+        }
+        bill.init();
+    </script>
+
+}
 

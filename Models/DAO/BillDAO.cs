@@ -23,5 +23,12 @@ namespace Models.DAO
             db.SaveChanges();
             return true;
         }
+        public bool changeStatus(int id)
+        {
+            var bill = db.bills.Find(id);
+            bill.status = !bill.status;
+            db.SaveChanges();
+            return bill.status;
+        }
     }
 }

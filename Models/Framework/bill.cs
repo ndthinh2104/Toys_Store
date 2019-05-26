@@ -22,7 +22,7 @@
         [DisplayName("Ngày đặt")]
         public DateTime? create_date { get; set; }
         [DisplayName("Trạng thái đơn hàng")]
-        public int? status { get; set; }
+        public bool status { get; set; }
         [DisplayName("Ghi chú")]
         public string note { get; set; }
         [DisplayName("Tên khách hàng")]

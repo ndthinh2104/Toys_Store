@@ -131,7 +131,7 @@
                     {
 
                         @Html.TextBox("SearchString")
-                        <button class="btn btn-default" type="submit" value="Tìm kiếm" style="float-left">
+                        <button class="btn btn-default" type="submit" value="Tìm kiếm">
                             <i class="fa fa-search"></i>
                         </button>
 
@@ -295,11 +295,8 @@
                                 </div>
                             </form>
                             <div class="row">
-                                <div class="col-sm-6 col-xs-6 frm-login text-left" style=" padding-left: 25px; ">
-                                    <a href="/User/register">Đăng ký</a><br>
-                                </div>
-                                <div class="col-sm-6 col-xs-6 pull-right frm-login text-right">
-                                    <a href="#">Quên mật khẩu ?</a><br>
+                                <div class="col-sm-12 col-xs-12 frm-login text-left">
+                                    <a class="btn btn-primary btn-block btn-flat" style="color: #fff" href="/User/register">Chưa có tài khoản ?</a><br>
                                 </div>
                             </div>
 
@@ -311,7 +308,7 @@
             </div>
         </div>
     </div>
-
+</div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.9.0/sweetalert2.all.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="~/Assets/Admin/js/jquery.min.js"></script>
@@ -328,8 +325,8 @@
 <script>
     $('#form-dn').on("submit", function () {
             var data = {
-                UserName: $('#UserName').val()
-                , Password: $('#Password').val()
+                username: $('#UserName').val()
+                , password: $('#Password').val()
             }
             console.log("data: ", data);
             $.ajax({
