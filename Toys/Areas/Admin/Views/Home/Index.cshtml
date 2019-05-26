@@ -1,13 +1,13 @@
 ﻿
 @{
-    Layout ="~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
     var products = (List<Models.Framework.product>)ViewBag.products;
     var bills = (List<Models.Framework.bill_detail>)ViewBag.bills;
     var users = (List<Models.Framework.user>)ViewBag.users;
 }
 @section header {
-    Trang chủ 
-    }
+    Trang chủ
+}
 
 <div class="row scrollbar" style="padding:10px;" id="bill">
     <div class="col-xs-12 force-overflow">
@@ -36,7 +36,7 @@
                             <td>@Html.DisplayFor(modelItem => item.price)</td>
                             <td>@Html.DisplayFor(modelItem => item.category.name)</td>
                             <td>@Html.DisplayFor(modelItem => item.manufacturer.name)</td>
-                            <td><button class="btn btn-success">@Html.ActionLink("Sửa", "Edit","products", new { id = item.id }, new { @style = "color:#fff" })</button></td>
+                            <td><button class="btn btn-success">@Html.ActionLink("Sửa", "Edit", "products", new { id = item.id }, new { @style = "color:#fff" })</button></td>
                             <td>
                                 <button class="btn btn-danger">
                                     @Ajax.ActionLink("Xóa","Delete","products",new {@id = item.id },new AjaxOptions
@@ -72,18 +72,30 @@
                         <th style="border-top:none;">Tên sản phẩm</th>
                         <th style="border-top:none;">Số lượng</th>
                         <th style="border-top:none;">Giá </th>
+                        <th style="border-top:none;">Trạng thái đơn hàng </th>
                         <th style="border-top:none;">Ngày đặt</th>
                     </tr>
                     @foreach (var item in bills)
                     {
+                        var stt = "";
+                        if (item.bill.status == true)
+                        {
+                            stt = "processed";
+                        }
+                        else
+                        {
+                            stt = "unprocessed";
+                        }
 
                     <tr id="row_@item.bill_id">
                         <td>@Html.DisplayFor(modelItem => item.bill_id)</td>
                         <td>@Html.DisplayFor(modelItem => item.product.name)</td>
                         <td>@Html.DisplayFor(modelItem => item.amount)</td>
                         <td>@Html.DisplayFor(modelItem => item.price)</td>
+                        <td class="@stt">
+                            <a href="#" class="btn-active" data-id="@item.bill_id">@(item.bill.status ? "Đã xử lý" : "Chưa xử lý")</a>
+                        </td>
                         <td>@Html.DisplayFor(modelItem => item.bill.create_date)</td>
-                        <td><button class="btn btn-success">@Html.ActionLink("Sửa", "Edit", "bills", new { id = item.bill_id }, new { @style = "color:#fff" })</button></td>
                         <td>
                             <button class="btn btn-danger">
                                 @Ajax.ActionLink("Xóa","Delete","bills",new {@id = item.bill_id },new AjaxOptions
@@ -125,7 +137,7 @@
                             <td>@Html.DisplayFor(modelItem => item.id)</td>
                             <td>@Html.DisplayFor(modelItem => item.username)</td>
                             <td>@Html.DisplayFor(modelItem => item.fullname)</td>
-                            <td><button class="btn btn-success">@Html.ActionLink("Sửa", "Edit","users", new { id = item.id }, new { @style = "color:#fff" })</button></td>
+                            <td><button class="btn btn-success">@Html.ActionLink("Sửa", "Edit", "users", new { id = item.id }, new { @style = "color:#fff" })</button></td>
                             <td>
                                 <button class="btn btn-danger">
                                     @Ajax.ActionLink("Xóa","Delete", "users", new {@id = item.id },new AjaxOptions
@@ -146,3 +158,50 @@
         <!-- /.box -->
     </div>
 </div>
+<style>
+    .processed {
+        color: #fff;
+        background-color: #449d44;
+        border-color: #398439;
+    }
+
+    .unprocessed {
+        color: #fff;
+        background-color: #d9534f;
+        border-color: #d43f3a;
+    }
+</style>
+@section jsFooter {
+    <script>
+        var bill = {
+            init: function () {
+                bill.registerEvents();
+            },
+            registerEvents: function () {
+                $('.btn-active').off('click').on('click', function (e) {
+                    e.preventDefault();
+                    var btn = $(this);
+                    var id = $(this).data('id');
+                    $.ajax({
+                        url: "/bills/checkStatus",
+                        data: { id: id },
+                        dataType: "json",
+                        type: "POST",
+                        success: function (response) {
+                            if (response.status == true) {
+                                btn.text('Đã xử lý');
+                            }
+                            else {
+                                btn.text('Chưa xử lý');
+                            }
+                            window.location.reload();
+                        }
+                    });
+                });
+            }
+        }
+        bill.init();
+    </script>
+
+}
+
